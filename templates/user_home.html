@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Home</title>
+</head>
+<body>
+
+    <h1>Your inbox:</h1>
+    <div id="div_inbox"></div>
+
+    <h1>Send a Message:</h1>
+
+    To:
+    <br>
+    <input type="text" name="" id="input_destname">
+    <br>
+    Message:
+    <br>
+    <input type="text" name="" id="input_message_text">
+    <br>
+    <input type="button" value="Send" id="button_send_message">
+    
+
+    <script src="{{url_for('static', filename='/scripts/apis.js')}}"> </script>
+    <script src="{{url_for('static', filename='/scripts/user_home.js')}}"> </script>
+
+
+
+    
+</body>
+</html>
