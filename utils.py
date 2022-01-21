@@ -10,12 +10,12 @@ from datetime import datetime
 from time import time
 
 
-def create_user(username, hashed_password):
+def create_user(username, hashed_password, public_key):
 
     """
     Creates a new user with a username and a (hashed) password.
     """
-    new_row = pd.DataFrame( [(username, hashed_password, "", "")], columns= __USER_COLUMNS )
+    new_row = pd.DataFrame( [(username, hashed_password, public_key, "", "")], columns= __USER_COLUMNS )
     t = __users_table()
     t = t.append(new_row)
     t.to_csv( __USERS_PATH , index=False)
@@ -112,6 +112,13 @@ def session_id_expired(username):
     return datetime.now() >= expiration_date
 
 
+def get_public_key(username):
+    """
+    Get the public key of a user.
+    """
+    t = __users_table()
+    return t.loc[ (t.username==username)  , "public_key"].to_list()[0]
+
 
 
 # ----- methods that depend on the implementation --------
@@ -121,7 +128,7 @@ __ROOT_PATH = "./dynamic/tables"
 __USERS_PATH = __ROOT_PATH+"/users.csv"
 __MESSAGE_PATH = __ROOT_PATH+"/messages.csv"
 
-__USER_COLUMNS =  ("username", "hashed_password", "session_id", "expiration_session_id")
+__USER_COLUMNS =  ("username", "hashed_password", "public_key", "session_id", "expiration_session_id")
 
 __MESSAGE_COLUMNS = ("sendername", "destname", "message_text", "timestamp")
 

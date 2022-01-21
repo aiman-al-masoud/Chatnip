@@ -18,9 +18,18 @@ document.getElementById("button_send_message").addEventListener("click", functio
 function displayMessages(messages){
     const div_inbox = document.getElementById("div_inbox")
     div_inbox.innerHTML = ""
+    
+    //myKeyPair should be globally accessible from any page 
+    //but alas, it is not
+    myKeyPair = cryptico.generateRSAKey(getCookie("password"), 1024);
+
     for(let message of messages){
+        
         console.log(message)
-        div_inbox.innerHTML+= `<p>${message["sendername"]}: ${message["message_text"]}</p>`
+        console.log(message["message_text"])
+        console.log(myKeyPair)
+        let messageText = cryptico.decrypt(message["message_text"], myKeyPair).plaintext
+        div_inbox.innerHTML+= `<p>${message["sendername"]}: ${messageText}</p>`
     }
 }
 

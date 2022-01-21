@@ -41,6 +41,18 @@ function getCookie(cname) {
  */
 function authenticate(username, password) {
 
+    let bits = 1024; // The length of the RSA key, in bits.
+    
+    //myKeyPair should be globally accessible from any page 
+    //myKeyPair = cryptico.generateRSAKey(password, bits);
+    //console.log("HELLOOOOOOOOOOOOOOOOOOOOOOOOOO", myKeyPair)
+    
+    // extrema ratio: because STUPID js global variables aren't working 
+    // and localStorage isn't working either.
+    setCookie("password", password)
+
+    
+
     let data = { username: username, password: password };
 
     let url = "/authenticate"
@@ -50,11 +62,11 @@ function authenticate(username, password) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     })
-    .then((res) => { return res.json(); })
+        .then((res) => { return res.json(); })
 
-    .then( (data) => {
+        .then((data) => {
             console.log(data["session_id"])
-            setCookie("session_id",  data["session_id"]);
+            setCookie("session_id", data["session_id"]);
             setCookie("username", username);
         })
 
@@ -68,7 +80,12 @@ function authenticate(username, password) {
  */
 function createUser(username, password) {
 
-    let data = { username: username, password: password };
+    
+    let bits = 1024;// The length of the RSA key, in bits.
+    let rsaKeyPair = cryptico.generateRSAKey(password, bits);
+    let publicKey = cryptico.publicKeyString(rsaKeyPair);
+
+    let data = { username: username, password: password, public_key: publicKey };
 
     let url = "/create_user"
 
@@ -76,7 +93,7 @@ function createUser(username, password) {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
-    }).then((res)=>{console.log(res)})// TODO remove
+    }).then((res) => { console.log(res) })// TODO remove
 
 }
 
@@ -86,15 +103,27 @@ function createUser(username, password) {
  * @param {*} message_text: text pf the message.
  * @returns 
  */
-function uploadMessage( destname, message_text) {
+function uploadMessage(destname, message_text) {
 
-    let data = { username: getCookie("username"), destname: destname, message_text: message_text, timestamp: Math.round((new Date()).getTime() / 1000), session_id: getCookie("session_id") };
-    let url = "/upload_message"
 
-    return fetch(url, {
+    fetch("/get_public_key", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify({ username: destname })
+    })
+    .then((res)=>{return res.json();})
+    .then((pubkdata)=>{
+
+        let encryptedMsg = cryptico.encrypt(message_text, pubkdata["public_key"]).cipher;
+
+
+        let msgdata = { username: getCookie("username"), destname: destname, message_text: encryptedMsg, timestamp: Math.round((new Date()).getTime() / 1000), session_id: getCookie("session_id") };
+        fetch("/upload_message", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(msgdata)
+        })
+
     })
 
 }
@@ -104,6 +133,7 @@ function uploadMessage( destname, message_text) {
  * @returns 
  */
 function downloadMessages() {
+
 
     let data = { username: getCookie("username"), session_id: getCookie("session_id") };
     let url = "/download_messages"

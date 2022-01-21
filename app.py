@@ -61,12 +61,14 @@ def on_create_user():
     # get from request
     username = request.json["username"]
     password = request.json["password"]
+    public_key = request.json["public_key"]
+
 
     if U.user_exists(username):
         #return json.dumps({"error":"username_already_taken"}) # fail
         return f"Username '{username}' is already taken!" # fail
     
-    U.create_user(username, U.hash_password(password))
+    U.create_user(username, U.hash_password(password), public_key)
     
     return "" # success
 
@@ -144,10 +146,14 @@ def on_download_messages():
 
 
 
+@app.route("/get_public_key", methods=["POST", "GET"])
+def on_get_public_key():
+    """
+    Api: Returns the public key of a user.
+    """
 
-
-
-
+    username = request.json["username"]
+    return json.dumps({"public_key" : U.get_public_key(username) })
 
 
 
