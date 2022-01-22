@@ -117,7 +117,8 @@ function uploadMessage(destname, message_text) {
     .then((res)=>{return res.json();})
     .then((pubkdata)=>{
 
-        let encryptedMsg = cryptico.encrypt(message_text, pubkdata["public_key"]).cipher;
+        let bits = 1024;
+        let encryptedMsg = cryptico.encrypt(message_text, pubkdata["public_key"], cryptico.generateRSAKey(getCookie("password"), bits)  ).cipher;
 
         let msgdata = { username: getCookie("username"), destname: destname, message_text: encryptedMsg, timestamp: Math.round((new Date()).getTime() / 1000), session_id: getCookie("session_id") };
         fetch("/upload_message", {

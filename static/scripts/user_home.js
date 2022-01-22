@@ -32,11 +32,17 @@ function displayMessages(messages){
         console.log(message)
         console.log(message["message_text"])
         console.log(myKeyPair)
-        let messageText = cryptico.decrypt(message["message_text"], myKeyPair).plaintext
+
+
+        let decryptionRes = cryptico.decrypt(message["message_text"], myKeyPair);
+
+        let messageText = decryptionRes.plaintext
+        let signature  = decryptionRes.signature         
+
         
         let date = new Date(message["timestamp"]*1000).toLocaleDateString("en-US", options)
 
-        div_inbox.innerHTML+= `<p>${date.toString()}\n${message["sendername"]}: ${messageText}</p>`
+        div_inbox.innerHTML+= `<p>${date.toString()}\n\n${signature}\n${message["sendername"]}: ${messageText}</p>`
     }
 }
 
