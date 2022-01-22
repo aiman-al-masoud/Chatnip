@@ -3,7 +3,6 @@
  * Sets the value of a cookie.
  * @param {*} cname: cookie name 
  * @param {*} cvalue: cookie value
- * @param {*} exdays: days before it expires.
  */
 function setCookie(cname, cvalue) {
     const exdays = 0.1
@@ -93,7 +92,7 @@ function createUser(username, password) {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
-    }).then((res) => { console.log(res) })// TODO remove
+    }).then((res) => { alert("Signup Successful! Please log in.") })// TODO remove
 
 }
 
@@ -115,7 +114,6 @@ function uploadMessage(destname, message_text) {
     .then((pubkdata)=>{
 
         let encryptedMsg = cryptico.encrypt(message_text, pubkdata["public_key"]).cipher;
-
 
         let msgdata = { username: getCookie("username"), destname: destname, message_text: encryptedMsg, timestamp: Math.round((new Date()).getTime() / 1000), session_id: getCookie("session_id") };
         fetch("/upload_message", {

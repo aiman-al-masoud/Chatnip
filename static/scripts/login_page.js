@@ -19,6 +19,17 @@ document.getElementById("button_login").addEventListener("click", function(elem,
 document.getElementById("button_signup").addEventListener("click", function(elem, event){
     let username = document.getElementById("input_username").value 
     let password =  document.getElementById("input_password").value 
+
     createUser(username, password)
 
 })
+
+
+/**
+ * On load.
+ */
+//body.addEventListener("onload", function(elem, event){
+// document.getElementById("input_username").value = getCookie("username")
+//})
+
+
