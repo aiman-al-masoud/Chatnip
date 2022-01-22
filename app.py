@@ -34,9 +34,10 @@ def on_user_home():
     Deny access, if requesting user's session-id is expired or invalid.
     """
     
-    # get from request
-    username = request.form["username"]
-    session_id = request.form["session_id"]
+    # get from cookies
+    username = request.cookies["username"]
+    session_id = request.cookies["session_id"]
+
     app.logger.info(f"on_user_home: Username: {username}, Session Id: {session_id}")
     
 
@@ -129,11 +130,10 @@ def on_download_messages():
     Api: Listen for users requesting messages from their own inbox.
     """
 
-    # get from request
-    username = request.json["username"]
-    session_id = request.json["session_id"]
+    # get from cookies
+    username = request.cookies["username"] 
+    session_id = request.cookies["session_id"]
 
-        
     if U.session_id_expired(username):
         return "" # fail
 
@@ -149,7 +149,7 @@ def on_download_messages():
 @app.route("/get_public_key", methods=["POST", "GET"])
 def on_get_public_key():
     """
-    Api: Returns the public key of a user.
+    Api: Returns the public key of any user.
     """
 
     username = request.json["username"]

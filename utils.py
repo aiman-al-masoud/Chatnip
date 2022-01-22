@@ -73,6 +73,16 @@ def get_inbox(username):
     return json_array.to_list()
 
 
+# def del_inbox(username):
+
+#     """
+#     Delete a user's inbox messages.
+#     """
+#     t = __message_table()
+#     t = t[(t.destname!=username)]
+#     t.to_csv(__MESSAGE_PATH, index=False)
+
+
 
 def get_session_id(username):
     

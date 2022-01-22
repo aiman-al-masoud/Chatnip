@@ -48,10 +48,10 @@ function authenticate(username, password) {
     //console.log("HELLOOOOOOOOOOOOOOOOOOOOOOOOOO", myKeyPair)
     
     // extrema ratio: because STUPID js global variables aren't working 
-    // and localStorage isn't working either.
+    // and localStorage isn't working either for storing objects with functions.
     setCookie("password", password)
-
     
+
 
     let data = { username: username, password: password };
 
@@ -133,16 +133,7 @@ function uploadMessage(destname, message_text) {
  * @returns 
  */
 function downloadMessages() {
-
-
-    let data = { username: getCookie("username"), session_id: getCookie("session_id") };
-    let url = "/download_messages"
-
-    return fetch(url, {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-    })
+    return fetch("/download_messages")
 }
 
 

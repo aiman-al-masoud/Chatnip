@@ -8,8 +8,7 @@ document.getElementById("button_login").addEventListener("click", function(elem,
     authenticate(username, password)
     .then((res)=> { 
         //redirect user to /user_home 
-        document.getElementById("input_session_id").value = getCookie("session_id");
-        document.forms["login_form"].submit();
+        window.location.href = "/user_home"
       })
 })
 

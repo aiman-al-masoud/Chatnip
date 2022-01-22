@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/stylesheets/style.css')}}">
     <title>My Home</title>
 </head>
 <body>
 
     <h1>Your inbox:</h1>
-    <div id="div_inbox"></div>
+    
+    <div id="div_inbox" class="scroll_bar"></div>
+
 
     <h1>Send a Message:</h1>
 

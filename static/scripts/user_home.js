@@ -22,6 +22,10 @@ function displayMessages(messages){
     //myKeyPair should be globally accessible from any page 
     //but alas, it is not
     myKeyPair = cryptico.generateRSAKey(getCookie("password"), 1024);
+    
+    
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour:"numeric", minute:"numeric"};
+
 
     for(let message of messages){
         
@@ -29,12 +33,15 @@ function displayMessages(messages){
         console.log(message["message_text"])
         console.log(myKeyPair)
         let messageText = cryptico.decrypt(message["message_text"], myKeyPair).plaintext
-        div_inbox.innerHTML+= `<p>${message["sendername"]}: ${messageText}</p>`
+        
+        let date = new Date(message["timestamp"]*1000).toLocaleDateString("en-US", options)
+
+        div_inbox.innerHTML+= `<p>${date.toString()}\n${message["sendername"]}: ${messageText}</p>`
     }
 }
 
 function checkForMessages() {
-    const millisecs = 1000
+    const millisecs = 2000
     setTimeout(checkForMessages, millisecs);
     downloadMessages().then((res)=> {return res.json();}).then((data)=> {displayMessages(data)})
 }
