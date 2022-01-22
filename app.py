@@ -64,12 +64,16 @@ def on_create_user():
     password = request.json["password"]
     public_key = request.json["public_key"]
 
+    
 
     if U.user_exists(username):
         #return json.dumps({"error":"username_already_taken"}) # fail
         return f"Username '{username}' is already taken!" # fail
     
-    U.create_user(username, U.hash_password(password), public_key)
+    salt = U.generate_salt()
+    salted_and_hashed_password = U.hash_password(password+salt)
+
+    U.create_user(username, salted_and_hashed_password , salt , public_key)
     
     return "" # success
 
@@ -89,7 +93,7 @@ def on_authenticate():
     if not U.user_exists(username):
         return "ERROR: INVALID USERNAME!"
 
-    if U.get_hashed_password(username)==U.hash_password(password_attempt):
+    if U.get_hashed_password(username)==U.hash_password(password_attempt+U.get_salt(username)):
         session_id = U.generate_session_id()
         U.set_session_id(username, session_id)
         return json.dumps({"session_id": session_id})

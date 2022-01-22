@@ -10,12 +10,18 @@ from datetime import datetime
 from time import time
 
 
-def create_user(username, hashed_password, public_key):
+import secrets
+
+
+
+
+def create_user(username, hashed_password, salt, public_key):
 
     """
     Creates a new user with a username and a (hashed) password.
     """
-    new_row = pd.DataFrame( [(username, hashed_password, public_key, "", "")], columns= __USER_COLUMNS )
+        
+    new_row = pd.DataFrame( [(username, hashed_password, salt, public_key, "", "")], columns= __USER_COLUMNS )
     t = __users_table()
     t = t.append(new_row)
     t.to_csv( __USERS_PATH , index=False)
@@ -131,6 +137,21 @@ def get_public_key(username):
 
 
 
+def get_salt(username):
+    """
+    Get a user's salt
+    """
+    t = __users_table()
+    return t.loc[ (t.username==username)  , "salt"].to_list()[0]
+    
+
+# def set_salt(username, salt):
+#     pass
+
+def generate_salt():
+    return secrets.token_hex(8)
+
+
 # ----- methods that depend on the implementation --------
 
 __ROOT_PATH = "./dynamic/tables"
@@ -138,7 +159,7 @@ __ROOT_PATH = "./dynamic/tables"
 __USERS_PATH = __ROOT_PATH+"/users.csv"
 __MESSAGE_PATH = __ROOT_PATH+"/messages.csv"
 
-__USER_COLUMNS =  ("username", "hashed_password", "public_key", "session_id", "expiration_session_id")
+__USER_COLUMNS =  ("username", "hashed_password", "salt", "public_key", "session_id", "expiration_session_id")
 
 __MESSAGE_COLUMNS = ("sendername", "destname", "message_text", "timestamp")
 
