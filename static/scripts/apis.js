@@ -48,9 +48,8 @@ function authenticate(username, password) {
     
     // extrema ratio: because STUPID js global variables aren't working 
     // and localStorage isn't working either for storing objects with functions.
-    setCookie("password", password)
+    setCookie("password", sha256.hex(password))
     
-
 
     let data = { username: username, password: password };
 
@@ -81,8 +80,13 @@ function createUser(username, password) {
 
     
     let bits = 1024;// The length of the RSA key, in bits.
-    let rsaKeyPair = cryptico.generateRSAKey(password, bits);
+    // let rsaKeyPair = cryptico.generateRSAKey(password, bits);
+    // let publicKey = cryptico.publicKeyString(rsaKeyPair);
+    
+
+    let rsaKeyPair = cryptico.generateRSAKey(sha256.hex(password), bits);
     let publicKey = cryptico.publicKeyString(rsaKeyPair);
+
 
     let data = { username: username, password: password, public_key: publicKey };
 
