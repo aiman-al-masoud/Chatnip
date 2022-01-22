@@ -2,7 +2,7 @@
 Provides a layer of abstraction between the app's business logic and the database's implementation.
 """
 
-from Crypto.Hash import SHA256 
+# from Crypto.Hash import SHA256 
 import random
 import os
 import pandas as pd
@@ -45,12 +45,12 @@ def get_hashed_password(username):
 
 
 
-def hash_password(password_or_password_attempt):
+# def hash_password(password_or_password_attempt):
     
-    """
-    Return the hash of a password or password attempt.
-    """
-    return SHA256.new(data= password_or_password_attempt.encode("utf-8") ).hexdigest()
+#     """
+#     Return the hash of a password or password attempt.
+#     """
+#     return SHA256.new(data= password_or_password_attempt.encode("utf-8") ).hexdigest()
    
 def append_to_inbox(username, message):
     
