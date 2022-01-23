@@ -144,7 +144,9 @@ def on_download_messages():
     if int(U.get_session_id(username))!=int(session_id):
         return "" # fail
 
-    return json.dumps(U.get_inbox(username))
+    inbox = U.get_inbox(username)
+    U.del_inbox(username)
+    return json.dumps(inbox)
     
     
 

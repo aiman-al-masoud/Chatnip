@@ -75,17 +75,23 @@ def get_inbox(username):
     """
     t = __message_table()
     json_array = t[(t.destname==username)].apply(lambda row : { "sendername":row["sendername"], "message_text": row["message_text"], "timestamp":row["timestamp"]  } , axis=1  )
-    return json_array.to_list()
+    try:
+        return json_array.to_list()
+    except:
+        return []
+
+    
 
 
-# def del_inbox(username):
+def del_inbox(username):
 
-#     """
-#     Delete a user's inbox messages.
-#     """
-#     t = __message_table()
-#     t = t[(t.destname!=username)]
-#     t.to_csv(__MESSAGE_PATH, index=False)
+    """
+    Delete a user's inbox messages.
+    """
+    t = __message_table()
+    t = t[(t.destname!=username)]
+    t.to_csv(__MESSAGE_PATH, index=False)
+
 
 
 
