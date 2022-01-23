@@ -4,7 +4,7 @@
 document.getElementById("button_send_message").addEventListener("click", function (elem, event) {
     const destname = document.getElementById("input_destname").value
     const messageText = document.getElementById("input_message_text").value
-    document.getElementById("input_destname").value = ""
+    //document.getElementById("input_destname").value = ""
     document.getElementById("input_message_text").value = ""
 
     // if sending msg to smn other than self, display own msg.
@@ -22,8 +22,11 @@ document.getElementById("button_send_message").addEventListener("click", functio
 function displayMessages() {
     const div_inbox = document.getElementById("div_inbox")
     div_inbox.innerHTML = ""
+    const currentChat = document.getElementById("input_destname").value;
     for (let message of messages) {
-        div_inbox.innerHTML += `<p>${message.date}\n\n${message.signature}\n${message.sendername}: ${message.message_text}</p>`
+        if(message.sendername==currentChat ||  message.sendername=="myself"){
+            div_inbox.innerHTML += `<p>${message.date}\n\n${message.signature}\n${message.sendername}: ${message.message_text}</p>`
+        }
     }
 }
 
