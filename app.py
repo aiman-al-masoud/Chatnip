@@ -150,7 +150,6 @@ def on_download_messages():
     
     
 
-
 @app.route("/get_public_key", methods=["POST", "GET"])
 def on_get_public_key():
     """
