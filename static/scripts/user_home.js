@@ -25,7 +25,8 @@ function displayMessages() {
     const currentChat = document.getElementById("input_destname").value;
     for (let message of messages) {
         if(message.sendername==currentChat ||  message.sendername=="myself"){
-            div_inbox.innerHTML += `<p>${message.date}\n\n${message.signature}\n${message.sendername}: ${message.message_text}</p>`
+            //div_inbox.innerHTML += `<p>${message.date}\n\n${message.signature}\n${message.sendername}: ${message.message_text}</p>`
+            div_inbox.appendChild(ChatMsg(message))
         }
     }
 }
@@ -74,11 +75,73 @@ window.addEventListener("load", function () {
 
 
 
-// storage = (function () {
-//     let messages = [];
-//     return function () {
-//     }
-// })();
 
 
 
+function createElementFromHTML(htmlString) {
+    var div = document.createElement('div');
+    div.innerHTML = htmlString.trim();
+    // Change this to div.childNodes to support multiple top-level nodes.
+    //return div.firstChild;
+    return div
+}
+
+
+/**
+ * Creates an element to display the name of a chat.
+ * @param {string} name 
+ * @returns 
+ */
+function ChatName(name) {
+    let html = `
+    <div class="chat_name">
+    <a onclick="displayChatByName('${name}')"  href="">${name}</a>
+    </div>
+    `
+    return createElementFromHTML(html)
+}
+
+
+/**
+ * Create an element to display a message from a chat.
+ * @param {object} message 
+ * @returns 
+ */
+function ChatMsg(message) {
+
+    //get signature from message
+    //let signature = "verified";
+    let signature = message.signature
+
+    //useful constants 
+    const v = "verified"; const f = "forged"; const u = "unsigned";
+
+    const v_img = document.getElementById("verified").src; const f_img = document.getElementById("forged").src; const u_img = document.getElementById("unsigned").src;
+
+    
+
+    const v_txt = "This message was duly verified"; const f_txt = "Caution! This message is forged!"; const u_txt = "This message wasn't signed. Could be forged.";
+
+    let html = `
+    <div class="chat_msg">
+    
+    <p style='font-size:x-large'>${message.message_text}</p>
+    
+    <br>
+    <p>${message.date}</p>
+    <br>
+    <span> from: ${message.sendername}</span>
+    <img  src="${signature == v ? v_img : (signature == f ? f_img : u_img)}"
+          title= "${signature == v ? v_txt : (signature == f ? f_txt : u_txt)}"
+          width="50"
+    ></img>
+
+    </div>
+    `
+    return createElementFromHTML(html)
+}
+
+function displayChatByName(name){
+    alert(name)//TOREMOVE OFC
+    //  TODO
+}

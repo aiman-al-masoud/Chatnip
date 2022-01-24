@@ -25,15 +25,21 @@
     <input type="text" name="" id="input_message_text">
     <br>
     <input type="button" value="Send" id="button_send_message">
-    
+
+
+
+    <!--hidden images-->
+    <img hidden display="none" id="verified" src="{{url_for('static', filename='/icons/verified.png')}}" alt="">
+    <img hidden display="none" id="unsigned" src="{{url_for('static', filename='/icons/unsigned.png')}}" alt="">
+    <img hidden display="none" id="forged" src="{{url_for('static', filename='/icons/forged.png')}}" alt="">
+
+
+
 
 
     <script src="{{url_for('static', filename='/scripts/cryptico/cryptico.min.js')}}"> </script>
     <script src="{{url_for('static', filename='/scripts/apis.js')}}"> </script>
     <script src="{{url_for('static', filename='/scripts/user_home.js')}}"> </script>
-
-
-
     
 </body>
 </html>
