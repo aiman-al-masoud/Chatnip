@@ -1,1 +1,1 @@
-# A minimalist online instant messenger web-app.
+# A minimalist online instant-messenger.
