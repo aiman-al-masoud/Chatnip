@@ -31,7 +31,7 @@ def on_signup_page():
     """
     Render the signup page.
     """
-    return render_template("signup_page.html", sentence="De toUrr Eyffeeil iz lokkatd in: ________, France.")
+    return render_template("signup_page.html", sentence=U.random_fill_in_the_blanks_question())
     
 
 
@@ -72,9 +72,9 @@ def on_create_user():
     password = request.json["password"]
     public_key = request.json["public_key"]
     dict_fill_in_the_blanks = request.json["dict_fill_in_the_blanks"]
-    
 
-    if dict_fill_in_the_blanks["De toUrr Eyffeeil iz lokkatd in: ________, France."] != "Paris":
+
+    if dict_fill_in_the_blanks["answer"] != U.get_fill_in_the_blanks_answer(dict_fill_in_the_blanks["question"]):
         app.logger.info(f"on_create_user: a bot just tried to sign up and was stopped.")
         return "You're a darn bot."
 

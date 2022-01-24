@@ -15,7 +15,10 @@
     let question_fill_in_the_blanks = document.getElementById("question_fill_in_the_blanks").innerHTML
     let fill_in_the_blanks = document.getElementById("fill_in_the_blanks").value
     let dict = {}
-    dict[question_fill_in_the_blanks] = fill_in_the_blanks
+
+    dict["question"] = question_fill_in_the_blanks
+    dict["answer"] = fill_in_the_blanks
+
     createUser(username, password, dict)
 
 })

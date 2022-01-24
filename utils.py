@@ -156,6 +156,18 @@ def generate_salt():
     return secrets.token_hex(8)
 
 
+def random_fill_in_the_blanks_question():
+    """
+    """
+    return pd.read_csv("./res/fill_in_the_blanks.csv",sep="|").sample(n=1)["question"].to_list()[0]
+
+def get_fill_in_the_blanks_answer(question):
+    """
+    """
+    df = pd.read_csv("./res/fill_in_the_blanks.csv",sep="|")
+    return df[df["question"]==question]["answer"].to_list()[0] 
+
+
 # ----- methods that depend on the implementation --------
 
 __ROOT_PATH = "./dynamic/tables"
