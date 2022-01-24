@@ -130,7 +130,8 @@ dmypy.json
 
 
 
-#ignore env folder
+#ignore py env folder and vscode settings
 .my_env/
+.vscode
 
 #ignore changes to data folder
