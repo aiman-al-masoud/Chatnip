@@ -115,21 +115,16 @@ function ChatMsg(message) {
 
     //useful constants 
     const v = "verified"; const f = "forged"; const u = "unsigned";
-
     const v_img = document.getElementById("verified").src; const f_img = document.getElementById("forged").src; const u_img = document.getElementById("unsigned").src;
-
-    
-
     const v_txt = "This message was duly verified"; const f_txt = "Caution! This message is forged!"; const u_txt = "This message wasn't signed. Could be forged.";
 
     let html = `
     <div class="chat_msg">
     
-    <p style='font-size:x-large'>${message.message_text}</p>
+    <h2>${message.message_text}</h2>
     
-    <br>
     <p>${message.date}</p>
-    <br>
+    
     <span> from: ${message.sendername}</span>
     <img  src="${signature == v ? v_img : (signature == f ? f_img : u_img)}"
           title= "${signature == v ? v_txt : (signature == f ? f_txt : u_txt)}"

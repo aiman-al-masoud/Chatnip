@@ -1,3 +1,50 @@
 .scroll_bar{
-    width: 200px; height: 100px; overflow-y: scroll;
+     height : 200px; 
+     overflow-y: scroll;
+}
+
+
+
+
+.chat_name{
+    border: solid black 1px;
+    margin: 3px;
+    padding: 3px;
+    text-align: center;
+
+}
+
+.chat_msg{
+    border : solid black 1px;
+    padding-right: 250px;
+    padding-left: 250px;
+    margin : 4px;
+    text-align: center;
+    font-size: small;
+    
+}
+
+section{
+    float: right;
+}
+
+nav{
+    padding: 10px;
+    margin: 0px;
+    float: left;
+    background: chocolate;
+    list-style-type: none;
+}
+
+
+footer{
+    background-color:transparent;
+    color:white;
+    clear:both;
+    text-align:center;
+    /* padding-left:500px;
+    padding-top: 10px; */
+    /* padding-right :500px; */
+    position:sticky;
+    
 }

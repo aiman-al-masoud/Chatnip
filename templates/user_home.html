@@ -9,34 +9,29 @@
 </head>
 <body>
 
+
+
+    <nav id="navbar"> 
+        <li id="navbar_list"></li>
+    </nav>
+
+
+
     <h1>Your inbox:</h1>
     
     <div id="div_inbox" class="scroll_bar"></div>
 
 
-    <h1>Send a Message:</h1>
-
-    To:
-    <br>
-    <input type="text" name="" id="input_destname">
-    <br>
-    Message:
-    <br>
-    <input type="text" name="" id="input_message_text">
-    <br>
-    <input type="button" value="Send" id="button_send_message">
+    <footer> <div style="display: flex; flex-direction: row;">   <label for="input_destname">To:</label><input type="text" name="" id="input_destname"><label for="input_message_text">Msg:</label><input type="text" name="" id="input_message_text"><input type="button" value="Send" id="button_send_message">   </div> </footer>
 
 
-
-    <!--hidden images-->
+    <!--hidden images, to be used by scripts-->
     <img hidden display="none" id="verified" src="{{url_for('static', filename='/icons/verified.png')}}" alt="">
     <img hidden display="none" id="unsigned" src="{{url_for('static', filename='/icons/unsigned.png')}}" alt="">
     <img hidden display="none" id="forged" src="{{url_for('static', filename='/icons/forged.png')}}" alt="">
 
 
-
-
-
+    <!--run scripts once the page is loaded-->
     <script src="{{url_for('static', filename='/scripts/cryptico/cryptico.min.js')}}"> </script>
     <script src="{{url_for('static', filename='/scripts/apis.js')}}"> </script>
     <script src="{{url_for('static', filename='/scripts/user_home.js')}}"> </script>
