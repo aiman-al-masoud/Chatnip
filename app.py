@@ -22,9 +22,17 @@ def on_index():
 @app.route("/login_page", methods=["GET", "POST"])
 def on_login_page():
     """
-    Render the login/signup page.
+    Render the login page.
     """
     return render_template("login_page.html")
+
+@app.route("/signup_page", methods=["GET", "POST"])
+def on_signup_page():
+    """
+    Render the signup page.
+    """
+    return render_template("signup_page.html", sentence="De toUrr Eyffeeil iz lokkatd in: ________, France.")
+    
 
 
 @app.route("/user_home", methods=["GET", "POST"])
@@ -63,9 +71,10 @@ def on_create_user():
     username = request.json["username"]
     password = request.json["password"]
     public_key = request.json["public_key"]
-
+    dict_fill_in_the_blanks = request.json["dict_fill_in_the_blanks"]
     
-    if request.json["honeypot"] != "" :
+
+    if dict_fill_in_the_blanks["De toUrr Eyffeeil iz lokkatd in: ________, France."] != "Paris":
         app.logger.info(f"on_create_user: a bot just tried to sign up and was stopped.")
         return "You're a darn bot."
 
