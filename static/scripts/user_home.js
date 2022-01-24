@@ -20,9 +20,15 @@ document.getElementById("button_send_message").addEventListener("click", functio
  * Display messages.
  */
 function displayMessages() {
-    const div_inbox = document.getElementById("div_inbox")
-    div_inbox.innerHTML = ""
+
     const currentChat = document.getElementById("input_destname").value;
+    const div_inbox = document.getElementById("div_inbox")
+
+    if(div_inbox.childElementCount==  messages.length){ //instead of messages.length, lenght of messages in CURRENT CHAT
+        return;
+    }
+
+    div_inbox.innerHTML = ""
     for (let message of messages) {
         if(message.sendername==currentChat ||  message.sendername=="myself"){
             //div_inbox.innerHTML += `<p>${message.date}\n\n${message.signature}\n${message.sendername}: ${message.message_text}</p>`
@@ -122,7 +128,7 @@ function ChatMsg(message) {
     <div class="chat_msg">
     
     <h2>${message.message_text}</h2>
-    
+
     <p>${message.date}</p>
     
     <span> from: ${message.sendername}</span>
