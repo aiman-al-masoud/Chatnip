@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log-in/Sign-up</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/stylesheets/style.css')}}">
+
 </head>
 
 <body>
@@ -22,7 +24,7 @@
     <input id="button_login" type="button" value="Login">
     <br>
     <input id="button_signup" type="button" value="Sign-up">
-
+    <input id="honeypot" name="look_at_me" class="honeypot" type="text">
 
 
     <script src="{{url_for('static', filename='/scripts/cryptico/cryptico.min.js')}}"> </script>

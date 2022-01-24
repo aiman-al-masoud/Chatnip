@@ -70,12 +70,12 @@ function authenticate(username, password) {
  * @param {*} username 
  * @param {*} password 
  */
-function createUser(username, password) {
+function createUser(username, password, honeypot) {
 
     let rsaKeyPair = cryptico.generateRSAKey(sha256.hex(password), parseInt(localStorage.getItem("bits")));
     let publicKey = cryptico.publicKeyString(rsaKeyPair);
 
-    let data = { username: username, password: password, public_key: publicKey };
+    let data = { username: username, password: password, public_key: publicKey, honeypot:honeypot };
     let url = "/create_user"
 
     return fetch(url, {

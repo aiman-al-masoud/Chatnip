@@ -4,8 +4,6 @@
 }
 
 
-
-
 .chat_name{
     border: solid black 1px;
     margin: 3px;
@@ -42,9 +40,17 @@ footer{
     color:white;
     clear:both;
     text-align:center;
-    /* padding-left:500px;
-    padding-top: 10px; */
-    /* padding-right :500px; */
     position:sticky;
     
 }
+
+
+.honeypot{
+  color: transparent;
+  font-size: 0px;
+  background-color: transparent;
+  background: transparent;
+  display: none;
+  visibility: hidden;
+}
+

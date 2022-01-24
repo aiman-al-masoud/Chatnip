@@ -65,9 +65,11 @@ def on_create_user():
     public_key = request.json["public_key"]
 
     
+    if request.json["honeypot"] != "" :
+        app.logger.info(f"on_create_user: a bot just tried to sign up and was stopped.")
+        return "You're a darn bot."
 
     if U.user_exists(username):
-        #return json.dumps({"error":"username_already_taken"}) # fail
         return f"Username '{username}' is already taken!" # fail
     
     salt = U.generate_salt()
