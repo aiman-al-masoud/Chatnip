@@ -58,6 +58,9 @@ function authenticate(username, password) {
             setCookie("session_id", data["session_id"]);
             setCookie("username", username);
         })
+        .then((res) => {
+            window.location.href = "/user_home" //redirect user to /user_home
+        })
 
 }
 
@@ -74,6 +77,7 @@ function createUser(username, password, keypass, dict_fill_in_the_blanks) {
     let rsaKeyPair = cryptico.generateRSAKey(sha256.hex(keypass), parseInt(localStorage.getItem("bits")));
     let publicKey = cryptico.publicKeyString(rsaKeyPair);
     
+
 
     let data = { username: username, password: password, public_key: publicKey, dict_fill_in_the_blanks: dict_fill_in_the_blanks };
     let url = "/create_user"

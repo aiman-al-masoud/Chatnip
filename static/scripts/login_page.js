@@ -1,38 +1,59 @@
+/**
+ * On load.
+ */
+ window.addEventListener("load", function (elem, event) {
+    document.getElementById("input_username").value = getCookie("username")
+})
 
 /**
  * Clicking on login.
  */
 document.getElementById("button_login").addEventListener("click", function (elem, event) {
+
     let username = document.getElementById("input_username").value
     let password = document.getElementById("input_password").value
 
-    // set keypass to null if you're switching accounts
-    if(username!=getCookie("username")){
+    // set keypass to null if you're switching accounts or no previous log-ins
+    if (username != getCookie("username") ?? "") {
         localStorage.removeItem("keypass")
     }
-    
-    let keypass = localStorage.getItem("keypass")
-    
-    // if the keypass is null, bother the user with prompts till he sets it.
-    while(keypass==null){
-        keypass = prompt(`Keypass not found for ${username}, please enter it:`)
-        localStorage.setItem("keypass", sha256.hex(keypass))
+
+    // if keypass is null, wait till you get it from the user.
+    if (localStorage.getItem("keypass") == null) {
+        checkKeypass(username);
+    } else {
+        authenticate(username, password)
     }
 
-    // authenticate
-    authenticate(username, password)
-        .then((res) => {
-            window.location.href = "/user_home" //redirect user to /user_home
-        })
-})
-
+});
 
 
 /**
- * On load.
+ * Bother user with prompts till he sets it correclty.
+ * To avoid incomprehensible (badly deciphered) messages. 
  */
-//body.addEventListener("onload", function(elem, event){
-// document.getElementById("input_username").value = getCookie("username")
-//})
+function checkKeypass(username) {
 
+    //get it from the user.
+    keypass = prompt(`Keypass not found/incorrect for ${username}, please re-enter it:`)
+
+    //does keypass entered by user generate public-key present on server?
+    fetch("/get_public_key", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: username })
+    })
+        .then((res) => { return res.json(); })
+        .then((pubkdata) => {
+            let supposedPublicKey = cryptico.publicKeyString(cryptico.generateRSAKey(sha256.hex(keypass), parseInt(localStorage.getItem("bits"))));
+            if (supposedPublicKey != pubkdata.public_key) {
+                checkKeypass(username);
+            } else {
+                localStorage.setItem("keypass", sha256.hex(keypass));
+                let password = document.getElementById("input_password").value
+                authenticate(username, password)
+            }
+        });
+
+}
 
