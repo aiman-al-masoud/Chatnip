@@ -74,7 +74,7 @@ function checkForMessages() {
  */
 window.addEventListener("load", function () {
     window.messages = []
-    window.myKeyPair = cryptico.generateRSAKey(localStorage.getItem("password"), parseInt(localStorage.getItem("bits")));
+    window.myKeyPair = cryptico.generateRSAKey(localStorage.getItem("keypass"), parseInt(localStorage.getItem("bits")));
     window.options = { year: 'numeric', month: 'long', day: 'numeric', hour: "numeric", minute: "numeric" };
     checkForMessages()
 })

@@ -43,9 +43,6 @@ function getCookie(cname) {
  */
 function authenticate(username, password) {
 
-    //storing the password's hash (to be used to generate the private key when needed)
-    localStorage.setItem("password", sha256.hex(password))
-
     let data = { username: username, password: password };
     let url = "/authenticate"
 
@@ -70,10 +67,13 @@ function authenticate(username, password) {
  * @param {*} username 
  * @param {*} password 
  */
-function createUser(username, password, dict_fill_in_the_blanks) {
+function createUser(username, password, keypass, dict_fill_in_the_blanks) {
 
-    let rsaKeyPair = cryptico.generateRSAKey(sha256.hex(password), parseInt(localStorage.getItem("bits")));
+    localStorage.setItem("keypass", sha256.hex(keypass))
+    
+    let rsaKeyPair = cryptico.generateRSAKey(sha256.hex(keypass), parseInt(localStorage.getItem("bits")));
     let publicKey = cryptico.publicKeyString(rsaKeyPair);
+    
 
     let data = { username: username, password: password, public_key: publicKey, dict_fill_in_the_blanks: dict_fill_in_the_blanks };
     let url = "/create_user"
@@ -102,7 +102,7 @@ function uploadMessage(destname, message_text) {
     .then((res)=>{return res.json();})
     .then((pubkdata)=>{
 
-        let encryptedMsg = cryptico.encrypt(message_text, pubkdata["public_key"], cryptico.generateRSAKey(localStorage.getItem("password"), parseInt(localStorage.getItem("bits")))  ).cipher;
+        let encryptedMsg = cryptico.encrypt(message_text, pubkdata["public_key"], cryptico.generateRSAKey(localStorage.getItem("keypass"), parseInt(localStorage.getItem("bits")))  ).cipher;
 
         let msgdata = { username: getCookie("username"), destname: destname, message_text: encryptedMsg, timestamp: Math.round((new Date()).getTime() / 1000), session_id: getCookie("session_id") };
         fetch("/upload_message", {
