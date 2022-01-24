@@ -1,9 +1,9 @@
 
-Original source for the 'cryptico' codebase:
+Original source for the 'Cryptico' codebase:
 
 https://github.com/wwwtyro/cryptico
 
-This software (Cryptico) is licensed under the GPLv2 license according to the authors:
+Cryptico is licensed under the GPLv2 license according to the authors:
 
 ```
 /*
