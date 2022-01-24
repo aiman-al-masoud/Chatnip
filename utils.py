@@ -2,7 +2,6 @@
 Provides a layer of abstraction between the app's business logic and the database's implementation.
 """
 
-# from Crypto.Hash import SHA256 
 import hashlib
 import random
 import os
