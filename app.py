@@ -18,6 +18,13 @@ def on_index():
     """
     return render_template("index.html")
 
+@app.route("/about", methods=["GET"])
+def on_about():
+    """
+    Render the 'about' page.
+    """
+    return render_template("about.html")
+
 
 @app.route("/login_page", methods=["GET", "POST"])
 def on_login_page():
