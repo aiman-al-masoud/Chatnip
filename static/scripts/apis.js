@@ -1,3 +1,6 @@
+// some global constants
+localStorage.setItem("bits", 1024)// The length of the RSA key, in bits.
+
 
 /**
  * Sets the value of a cookie.
@@ -40,19 +43,10 @@ function getCookie(cname) {
  */
 function authenticate(username, password) {
 
-    let bits = 1024; // The length of the RSA key, in bits.
-    
-    //myKeyPair should be globally accessible from any page 
-    //myKeyPair = cryptico.generateRSAKey(password, bits);
-    //console.log("HELLOOOOOOOOOOOOOOOOOOOOOOOOOO", myKeyPair)
-    
-    // extrema ratio: because STUPID js global variables aren't working 
-    // and localStorage isn't working either for storing objects with functions.
-    setCookie("password", sha256.hex(password))
-    
+    //storing the password's hash (to be used to generate the private key when needed)
+    localStorage.setItem("password", sha256.hex(password))
 
     let data = { username: username, password: password };
-
     let url = "/authenticate"
 
     return fetch(url, {
@@ -78,18 +72,10 @@ function authenticate(username, password) {
  */
 function createUser(username, password) {
 
-    
-    let bits = 1024;// The length of the RSA key, in bits.
-    // let rsaKeyPair = cryptico.generateRSAKey(password, bits);
-    // let publicKey = cryptico.publicKeyString(rsaKeyPair);
-    
-
-    let rsaKeyPair = cryptico.generateRSAKey(sha256.hex(password), bits);
+    let rsaKeyPair = cryptico.generateRSAKey(sha256.hex(password), parseInt(localStorage.getItem("bits")));
     let publicKey = cryptico.publicKeyString(rsaKeyPair);
 
-
     let data = { username: username, password: password, public_key: publicKey };
-
     let url = "/create_user"
 
     return fetch(url, {
@@ -108,7 +94,6 @@ function createUser(username, password) {
  */
 function uploadMessage(destname, message_text) {
 
-
     fetch("/get_public_key", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
@@ -117,8 +102,7 @@ function uploadMessage(destname, message_text) {
     .then((res)=>{return res.json();})
     .then((pubkdata)=>{
 
-        let bits = 1024;
-        let encryptedMsg = cryptico.encrypt(message_text, pubkdata["public_key"], cryptico.generateRSAKey(getCookie("password"), bits)  ).cipher;
+        let encryptedMsg = cryptico.encrypt(message_text, pubkdata["public_key"], cryptico.generateRSAKey(localStorage.getItem("password"), parseInt(localStorage.getItem("bits")))  ).cipher;
 
         let msgdata = { username: getCookie("username"), destname: destname, message_text: encryptedMsg, timestamp: Math.round((new Date()).getTime() / 1000), session_id: getCookie("session_id") };
         fetch("/upload_message", {

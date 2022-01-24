@@ -7,8 +7,7 @@ document.getElementById("button_login").addEventListener("click", function (elem
     let password = document.getElementById("input_password").value
     authenticate(username, password)
         .then((res) => {
-            //redirect user to /user_home 
-            window.location.href = "/user_home"
+            window.location.href = "/user_home" //redirect user to /user_home
         })
 })
 

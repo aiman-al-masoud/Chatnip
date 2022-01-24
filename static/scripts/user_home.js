@@ -4,7 +4,6 @@
 document.getElementById("button_send_message").addEventListener("click", function (elem, event) {
     const destname = document.getElementById("input_destname").value
     const messageText = document.getElementById("input_message_text").value
-    //document.getElementById("input_destname").value = ""
     document.getElementById("input_message_text").value = ""
 
     // if sending msg to smn other than self, display own msg.
@@ -23,6 +22,8 @@ function displayMessages() {
 
     const currentChat = document.getElementById("input_destname").value;
     const div_inbox = document.getElementById("div_inbox")
+    
+    document.getElementById("title_one").innerHTML = currentChat //set title to name of chat
 
     if(div_inbox.childElementCount==  messages.length){ //instead of messages.length, lenght of messages in CURRENT CHAT
         return;
@@ -31,7 +32,6 @@ function displayMessages() {
     div_inbox.innerHTML = ""
     for (let message of messages) {
         if(message.sendername==currentChat ||  message.sendername=="myself"){
-            //div_inbox.innerHTML += `<p>${message.date}\n\n${message.signature}\n${message.sendername}: ${message.message_text}</p>`
             div_inbox.appendChild(ChatMsg(message))
         }
     }
@@ -40,6 +40,7 @@ function displayMessages() {
 
 /**
  * Download incoming messages.
+ * Recursive function that calls itself every n milliseconds.
  */
 function checkForMessages() {
     const millisecs = 2000
@@ -73,25 +74,22 @@ function checkForMessages() {
  */
 window.addEventListener("load", function () {
     window.messages = []
-    window.myKeyPair = cryptico.generateRSAKey(getCookie("password"), 1024);
+    window.myKeyPair = cryptico.generateRSAKey(localStorage.getItem("password"), parseInt(localStorage.getItem("bits")));
     window.options = { year: 'numeric', month: 'long', day: 'numeric', hour: "numeric", minute: "numeric" };
     checkForMessages()
 })
 
 
-
-
-
-
-
+/**
+ * The name says it all.
+ * @param {string} htmlString 
+ * @returns 
+ */
 function createElementFromHTML(htmlString) {
     var div = document.createElement('div');
     div.innerHTML = htmlString.trim();
-    // Change this to div.childNodes to support multiple top-level nodes.
-    //return div.firstChild;
     return div
 }
-
 
 /**
  * Creates an element to display the name of a chat.
@@ -115,8 +113,6 @@ function ChatName(name) {
  */
 function ChatMsg(message) {
 
-    //get signature from message
-    //let signature = "verified";
     let signature = message.signature
 
     //useful constants 
@@ -131,7 +127,7 @@ function ChatMsg(message) {
 
     <p>${message.date}</p>
     
-    <span> from: ${message.sendername}</span>
+    <p> from: ${message.sendername}</p>
     <img  src="${signature == v ? v_img : (signature == f ? f_img : u_img)}"
           title= "${signature == v ? v_txt : (signature == f ? f_txt : u_txt)}"
           width="50"
