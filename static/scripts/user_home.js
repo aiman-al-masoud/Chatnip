@@ -80,7 +80,7 @@ function createElementFromHTML(htmlString) {
 function ChatName(name) {
     let html = `
     <div class="chat_name">
-    <input type="button" onclick="switchToChat('${name}')" value="${name}"></input>
+    <input class="awesome_button" type="button" onclick="switchToChat('${name}')" value="${name}"></input>
     </div>
     `
     return createElementFromHTML(html)
@@ -94,7 +94,7 @@ function ChatName(name) {
 function ChatMsg(message) {
 
     if (message.isSentByMe ?? false) {
-        return createElementFromHTML(`<div class="chat_msg"><h2 style="margin-right: 200px; margin-left: 50px; margin-top: 10px;">${message.message_text}</h2></div>`)
+        return createElementFromHTML(`<div class="chat_msg   sent_by_me"><h2 style="margin-right: 200px; margin-left: 50px; margin-top: 10px;">${message.message_text}</h2></div>`)
     }
 
     //useful constants 
@@ -103,7 +103,7 @@ function ChatMsg(message) {
     const v_txt = "This message is verified"; const f_txt = "Caution! This message is forged!"; const u_txt = "This message wasn't signed. Could be forged.";
 
     let html = `
-    <div class="chat_msg">
+    <div class="chat_msg    sent_by_others">
     
       <h2 style="margin-right: 200px; margin-left: 60px; margin-top: 10px;">${message.message_text}</h2>
 

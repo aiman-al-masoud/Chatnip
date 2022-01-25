@@ -1,10 +1,14 @@
+body{
+    background: lightcyan;
+    font-family: sans-serif;
+}
+
 .scroll_bar{
      height : 200px; 
      overflow-y: scroll;
 }
 
 .chat_name{
-    border: solid black 1px;
     margin: 3px;
     padding: 3px;
     text-align: center;
@@ -17,20 +21,36 @@
     font-size: small;
     display: flex; 
     flex-direction: row;
+    border-radius: 25px;
 }
+
+.sent_by_me{
+    background: lightskyblue;
+}
+
+.sent_by_others{
+    background: lightseagreen;
+}
+
+
+
+
 
 section{
     float: right;
 }
 
 nav{
-    padding: 10px;
+    padding: 20px;
     margin: 10px;
     float: left;
     background: lightblue;
     list-style-type: none;
     width: 100px;
     height: 200px;
+    position: relative;
+    border: solid 1px black;
+    border-radius: 25px;
 }
 
 
@@ -52,6 +72,24 @@ footer{
     position:sticky;
     display: flex; 
     flex-direction: row;
+    float: right;
+}
+
+
+.text_input_box{
+    border-radius: 25px;
+    padding: 5px;
+}
+
+.awesome_button{
+    border-radius: 25px;
+    padding: 5px;
+}
+
+
+
+.center{
+    text-align: center;
 }
 
 
