@@ -21,6 +21,6 @@
     dict["question"] = question_fill_in_the_blanks
     dict["answer"] = fill_in_the_blanks
 
-    createUser(username, password,keypass, dict)
+    createUser(username, password, keypass, dict)
 
 })

@@ -9,7 +9,6 @@
     margin: 3px;
     padding: 3px;
     text-align: center;
-
 }
 
 .chat_msg{
@@ -28,7 +27,7 @@ section{
 
 nav{
     padding: 10px;
-    margin: 0px;
+    margin: 10px;
     float: left;
     background: chocolate;
     list-style-type: none;
@@ -37,20 +36,24 @@ nav{
 
 footer{
     background-color:transparent;
-    color:white;
+    color:black;
     clear:both;
     text-align:center;
     position:sticky;
-    
+    font-size: x-small;
+    margin: 10px;
+    padding: 10px;
+}
+
+.chat_input_bar{
+    background-color:transparent;
+    clear:both;
+    text-align:center;
+    position:sticky;
+    display: flex; 
+    flex-direction: row;
 }
 
 
-.honeypot{
-  color: transparent;
-  font-size: 0px;
-  background-color: transparent;
-  background: transparent;
-  display: none;
-  visibility: hidden;
-}
+
 
