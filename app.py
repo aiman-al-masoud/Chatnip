@@ -59,7 +59,7 @@ def on_user_home():
     if U.session_id_expired(username):
         return "session expired!"# fail
 
-    if int(U.get_session_id(username))!=int(session_id):
+    if U.get_session_id(username)!=session_id:
         return "wrong session id!"# fail
 
     return render_template("user_home.html")
@@ -136,7 +136,7 @@ def on_upload_message():
     if U.session_id_expired(username):
         return "" # fail
 
-    if int(U.get_session_id(username))!=int(session_id):
+    if U.get_session_id(username)!=session_id:
         return "" # fail
 
     
@@ -159,7 +159,7 @@ def on_download_messages():
     if U.session_id_expired(username):
         return "" # fail
 
-    if int(U.get_session_id(username))!=int(session_id):
+    if U.get_session_id(username)!=session_id:
         return "" # fail
 
     inbox = U.get_inbox(username)

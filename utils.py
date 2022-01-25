@@ -3,14 +3,11 @@ Provides a layer of abstraction between the app's business logic and the databas
 """
 
 import hashlib
-import random
 import os
 import pandas as pd
 from datetime import datetime
 from time import time
 import secrets
-
-
 
 
 def create_user(username, hashed_password, salt, public_key):
@@ -108,14 +105,14 @@ def generate_session_id():
     """
     Generate a new session id.
     """
-    return random.randint(0, 1000000000)
+    return secrets.token_hex(32)
 
 def set_session_id(username, session_id):
     
     """
     Renew a user's session id and session expiration time.
     """
-    SESSION_LENGTH = 5*60 # 5 minutes
+    SESSION_LENGTH = 5*60 # 5 minutes, duration
     t = __users_table()
     t.loc[ (t.username==username)  , "session_id"] = session_id
     t.loc[ (t.username==username)  , "expiration_session_id"] = int(time())+SESSION_LENGTH
