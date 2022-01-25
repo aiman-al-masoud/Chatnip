@@ -6,7 +6,7 @@ document.getElementById("button_send_message").addEventListener("click", functio
     const messageText = document.getElementById("input_message_text").value
     document.getElementById("input_message_text").value = ""
 
-    // if sending msg to smn other than self, display own msg.
+    // if sending msg to smn other than self, add own msg for display.
     if (destname != getCookie("username")) {
         messages.push({ sendername: "myself", message_text: messageText, date: new Date().toString().split("GMT")[0], signature: "" })
     }
@@ -60,12 +60,14 @@ function checkForMessages() {
 
                 messages.push({ sendername: message.sendername, date: date, signature: signature, message_text: messageText })
             }
-        }).then(function () {
-            displayMessages()
-
-        })
+        })  
+        
+        // .then(function () {
+        //      displayMessages()
+        // })
 
     displayMessages()
+    displayChatNames()
 }
 
 
@@ -99,7 +101,7 @@ function createElementFromHTML(htmlString) {
 function ChatName(name) {
     let html = `
     <div class="chat_name">
-    <a onclick="displayChatByName('${name}')"  href="">${name}</a>
+    <input type="button" onclick="displayChatByName('${name}')" value="${name}"></input>
     </div>
     `
     return createElementFromHTML(html)
@@ -135,13 +137,30 @@ function ChatMsg(message) {
           </div>
         </div>   
 
-
     </div>
     `
     return createElementFromHTML(html)
 }
 
 function displayChatByName(name) {
-    alert(name)//TOREMOVE OFC
-    //  TODO
+    document.getElementById("input_destname").value = name
 }
+
+
+function displayChatNames(){
+    document.getElementById("navbar_list").innerHTML=""
+
+    let names = []
+    for(let message of messages){
+        names.push(message.sendername);
+    }
+
+    console.log(names)
+
+    for(let name of new Set(names)){
+        document.getElementById("navbar_list").appendChild(ChatName(name))
+    }
+}
+
+
+
