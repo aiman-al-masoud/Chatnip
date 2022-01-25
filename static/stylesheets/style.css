@@ -13,11 +13,13 @@
 
 .chat_msg{
     border : solid black 1px;
-    padding-right: 250px;
-    padding-left: 250px;
+    /* padding-right: 250px; */
+    /* padding-left: 250px; */
     margin : 4px;
     text-align: center;
     font-size: small;
+    display: flex; 
+    flex-direction: row;
     
 }
 

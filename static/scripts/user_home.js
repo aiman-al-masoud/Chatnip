@@ -22,16 +22,16 @@ function displayMessages() {
 
     const currentChat = document.getElementById("input_destname").value;
     const div_inbox = document.getElementById("div_inbox")
-    
+
     document.getElementById("title_one").innerHTML = currentChat //set title to name of chat
 
-    if(div_inbox.childElementCount==  messages.length){ //instead of messages.length, lenght of messages in CURRENT CHAT
+    if (div_inbox.childElementCount == messages.length) { //instead of messages.length, lenght of messages in CURRENT CHAT
         return;
     }
 
     div_inbox.innerHTML = ""
     for (let message of messages) {
-        if(message.sendername==currentChat ||  message.sendername=="myself"){
+        if (message.sendername == currentChat || message.sendername == "myself") {
             div_inbox.appendChild(ChatMsg(message))
         }
     }
@@ -123,22 +123,25 @@ function ChatMsg(message) {
     let html = `
     <div class="chat_msg">
     
-    <h2>${message.message_text}</h2>
+      <h2 style="margin-right: 200px; margin-left: 50px; margin-top: 10px;">${message.message_text}</h2>
 
-    <p>${message.date}</p>
-    
-    <p> from: ${message.sendername}</p>
-    <img  src="${signature == v ? v_img : (signature == f ? f_img : u_img)}"
-          title= "${signature == v ? v_txt : (signature == f ? f_txt : u_txt)}"
-          width="50"
-    ></img>
+        <div style="margin-right: 10px;">
+          <p>${message.date}</p>        
+          <div style="display: flex; flex-direction: row;">
+            <p> from: ${message.sendername}</p>
+            <img  src="${signature == v ? v_img : (signature == f ? f_img : u_img)}"
+            title= "${signature == v ? v_txt : (signature == f ? f_txt : u_txt)}"
+            width="20" /img>
+          </div>
+        </div>   
+
 
     </div>
     `
     return createElementFromHTML(html)
 }
 
-function displayChatByName(name){
+function displayChatByName(name) {
     alert(name)//TOREMOVE OFC
     //  TODO
 }
