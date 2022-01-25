@@ -43,31 +43,15 @@ function displayMessages() {
  * Recursive function that calls itself every n milliseconds.
  */
 function checkForMessages() {
-    const millisecs = 2000
-    setTimeout(checkForMessages, millisecs);
-
+ 
     downloadMessages()
-
-        .then((res) => { return res.json(); })
-
-        .then((data) => {
-            for (let message of data) {
-
-                let decryptionRes = cryptico.decrypt(message["message_text"], myKeyPair);
-                let messageText = decryptionRes.plaintext;
-                let signature = decryptionRes.signature;
-                let date = new Date(message["timestamp"] * 1000).toLocaleDateString("en-US", options);
-
-                messages.push({ sendername: message.sendername, date: date, signature: signature, message_text: messageText })
-            }
-        })  
-        
-        // .then(function () {
-        //      displayMessages()
-        // })
+    .then((newMessages)=>{window.messages = window.messages.concat(newMessages); })
 
     displayMessages()
     displayChatNames()
+
+    const millisecs = 2000
+    setTimeout(checkForMessages, millisecs);
 }
 
 
@@ -76,8 +60,6 @@ function checkForMessages() {
  */
 window.addEventListener("load", function () {
     window.messages = []
-    window.myKeyPair = cryptico.generateRSAKey(localStorage.getItem("keypass"), parseInt(localStorage.getItem("bits")));
-    window.options = { year: 'numeric', month: 'long', day: 'numeric', hour: "numeric", minute: "numeric" };
     checkForMessages()
 })
 

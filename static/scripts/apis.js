@@ -77,8 +77,6 @@ function createUser(username, password, keypass, dict_fill_in_the_blanks) {
     let rsaKeyPair = cryptico.generateRSAKey(sha256.hex(keypass), parseInt(localStorage.getItem("bits")));
     let publicKey = cryptico.publicKeyString(rsaKeyPair);
     
-
-
     let data = { username: username, password: password, public_key: publicKey, dict_fill_in_the_blanks: dict_fill_in_the_blanks };
     let url = "/create_user"
 
@@ -120,11 +118,30 @@ function uploadMessage(destname, message_text) {
 }
 
 /**
- * Returns a promise that should resolve into messages from the current user's inbox.
+ * Returns a promise that should resolve into deciphered and ready-to-use messages from the current user's inbox.
  * @returns 
  */
 function downloadMessages() {
     return fetch("/download_messages")
+
+    .then((res) => { return res.json(); })
+
+    .then((data) => {
+            let messages = []
+            let myKeyPair = cryptico.generateRSAKey(localStorage.getItem("keypass"), parseInt(localStorage.getItem("bits")));
+            let options = { year: 'numeric', month: 'long', day: 'numeric', hour: "numeric", minute: "numeric" };
+
+            for (let message of data) {
+
+                let decryptionRes = cryptico.decrypt(message["message_text"], myKeyPair);
+                let messageText = decryptionRes.plaintext;
+                let signature = decryptionRes.signature;
+                let date = new Date(message["timestamp"] * 1000).toLocaleDateString("en-US", options);
+
+                messages.push({ sendername: message.sendername, date: date, signature: signature, message_text: messageText })
+            }
+            return messages;
+    })
 }
 
 
