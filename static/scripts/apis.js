@@ -1,4 +1,4 @@
-// some global constants
+// set some useful global constants
 localStorage.setItem("bits", 1024)// The length of the RSA key, in bits.
 
 

@@ -23,8 +23,9 @@ document.getElementById("button_send_message").addEventListener("click", functio
         let newMessage = { isSentByMe: true, destname: window.chatname, message_text: messageText, date: new Date().toString().split("GMT")[0] };
         messages.push(newMessage)
         document.getElementById("div_inbox").appendChild(ChatMsg(newMessage))
+        displayChatNames([newMessage])
     }
-
+    
     uploadMessage(window.chatname, messageText)
 })
 
@@ -60,7 +61,6 @@ function checkForMessages() {
 }
 
 
-
 /**
  * The name says it all.
  * @param {string} htmlString 
@@ -86,7 +86,6 @@ function ChatName(name) {
     return createElementFromHTML(html)
 }
 
-
 /**
  * Create an element to display a message from a chat.
  * @param {object} message 
@@ -101,7 +100,7 @@ function ChatMsg(message) {
     //useful constants 
     const v = "verified"; const f = "forged"; const u = "unsigned";
     const v_img = document.getElementById("verified").src; const f_img = document.getElementById("forged").src; const u_img = document.getElementById("unsigned").src;
-    const v_txt = "This message was duly verified"; const f_txt = "Caution! This message is forged!"; const u_txt = "This message wasn't signed. Could be forged.";
+    const v_txt = "This message is verified"; const f_txt = "Caution! This message is forged!"; const u_txt = "This message wasn't signed. Could be forged.";
 
     let html = `
     <div class="chat_msg">
@@ -112,9 +111,11 @@ function ChatMsg(message) {
           <p>${message.date}</p>        
           <div style="display: flex; flex-direction: row;">
             <p> from: ${message.sendername}</p>
-            <img  src="${message.signature == v ? v_img : (message.signature == f ? f_img : u_img)}"
-            title= "${message.signature == v ? v_txt : (message.signature == f ? f_txt : u_txt)}"
-            width="20" /img>
+           <div>
+           <img  src="${message.signature == v ? v_img : (message.signature == f ? f_img : u_img)}"
+           title= "${message.signature == v ? v_txt : (message.signature == f ? f_txt : u_txt)}"
+           /img>
+           </div>
           </div>
         </div>   
 
@@ -122,7 +123,6 @@ function ChatMsg(message) {
     `
     return createElementFromHTML(html)
 }
-
 
 
 /**
@@ -147,12 +147,11 @@ function displayChatNames(messages) {
 
     window.allChatnames = window.allChatnames.concat(newChatNames)
 
+    let navbar_list = document.getElementById("navbar_list");
     for (let name of new Set(newChatNames)) {
-        document.getElementById("navbar_list").appendChild(ChatName(name))
+        navbar_list.appendChild(ChatName(name))
     }
 }
-
-
 
 
 /**

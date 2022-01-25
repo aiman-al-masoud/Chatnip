@@ -3,7 +3,6 @@
      overflow-y: scroll;
 }
 
-
 .chat_name{
     border: solid black 1px;
     margin: 3px;
@@ -13,14 +12,11 @@
 
 .chat_msg{
     border : solid black 1px;
-    /* padding-right: 250px; */
-    /* padding-left: 250px; */
     margin : 4px;
     text-align: center;
     font-size: small;
     display: flex; 
     flex-direction: row;
-    
 }
 
 section{
@@ -31,8 +27,10 @@ nav{
     padding: 10px;
     margin: 10px;
     float: left;
-    background: chocolate;
+    background: lightblue;
     list-style-type: none;
+    width: 100px;
+    height: 200px;
 }
 
 
