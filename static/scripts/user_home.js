@@ -6,6 +6,12 @@
     window.chatname = ""
     window.messages = []
     window.allChatnames = []
+
+    // load messages stored locally
+    window.messages=  window.messages.concat(JSON.parse(localStorage.getItem("messages")))
+    window.messages = window.messages.filter((x) => !!x)
+    displayChatNames(window.messages)
+
     checkForMessages()
 })
 
@@ -54,6 +60,9 @@ function checkForMessages() {
                 document.getElementById("div_inbox").appendChild(ChatMsg(newMessage))
             }
             displayChatNames(newMessages)
+
+            //TODO: make this more efficient
+            localStorage.setItem("messages", JSON.stringify(window.messages))
         })
 
     const millisecs = 2000
@@ -178,7 +187,8 @@ function switchToChat(chatname) {
     //get and display only messages from 'chatname'
     let toDisplay = []
     for (let message of window.messages) {
-        if (message.destname == chatname || message.sendername == chatname) {
+
+        if (  message.destname == chatname || message.sendername == chatname) {
             toDisplay.push(message);
         }
     }

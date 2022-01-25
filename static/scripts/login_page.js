@@ -13,9 +13,10 @@ document.getElementById("button_login").addEventListener("click", function (elem
     let username = document.getElementById("input_username").value
     let password = document.getElementById("input_password").value
 
-    // set keypass to null if you're switching accounts or no previous log-ins
+    // delete the other user's local data if you're switching accounts or no previous log-ins
     if (username != getCookie("username") ?? "") {
         localStorage.removeItem("keypass")
+        localStorage.removeItem("messages")
     }
 
     // if keypass is null, wait till you get it from the user.
