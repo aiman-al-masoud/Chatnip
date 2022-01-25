@@ -8,7 +8,7 @@ document.getElementById("button_send_message").addEventListener("click", functio
 
     // if sending msg to smn other than self, add own msg for display.
     if (destname != getCookie("username")) {
-        messages.push({ sendername: "myself", message_text: messageText, date: new Date().toString().split("GMT")[0], signature: "" })
+        messages.push({ isSentByMe:true, destname:destname, message_text: messageText, date: new Date().toString().split("GMT")[0] })
     }
 
     uploadMessage(destname, messageText)
@@ -25,13 +25,11 @@ function displayMessages() {
 
     document.getElementById("title_one").innerHTML = currentChat //set title to name of chat
 
-    if (div_inbox.childElementCount == messages.length) { //instead of messages.length, lenght of messages in CURRENT CHAT
-        return;
-    }
+    // if (div_inbox.childElementCount == messages.length) {  return;}//instead of messages.length, lenght of messages in CURRENT CHAT
 
     div_inbox.innerHTML = ""
     for (let message of messages) {
-        if (message.sendername == currentChat || message.sendername == "myself") {
+        if(isInCurrentChat(message, currentChat)){
             div_inbox.appendChild(ChatMsg(message))
         }
     }
@@ -45,11 +43,11 @@ function displayMessages() {
 function checkForMessages() {
  
     downloadMessages()
-    .then((newMessages)=>{window.messages = window.messages.concat(newMessages); })
-
-    displayMessages()
+    .then((newMessages)=>{window.messages = window.messages.concat(newMessages);   })
+    
     displayChatNames()
-
+    displayMessages()
+    
     const millisecs = 2000
     setTimeout(checkForMessages, millisecs);
 }
@@ -97,7 +95,9 @@ function ChatName(name) {
  */
 function ChatMsg(message) {
 
-    let signature = message.signature
+    if(message.isSentByMe??false){
+        return createElementFromHTML(`<div><p>${message.message_text}</p></div>`)
+    }
 
     //useful constants 
     const v = "verified"; const f = "forged"; const u = "unsigned";
@@ -113,8 +113,8 @@ function ChatMsg(message) {
           <p>${message.date}</p>        
           <div style="display: flex; flex-direction: row;">
             <p> from: ${message.sendername}</p>
-            <img  src="${signature == v ? v_img : (signature == f ? f_img : u_img)}"
-            title= "${signature == v ? v_txt : (signature == f ? f_txt : u_txt)}"
+            <img  src="${message.signature == v ? v_img : (message.signature == f ? f_img : u_img)}"
+            title= "${message.signature == v ? v_txt : (message.signature == f ? f_txt : u_txt)}"
             width="20" /img>
           </div>
         </div>   
@@ -133,16 +133,29 @@ function displayChatNames(){
     document.getElementById("navbar_list").innerHTML=""
 
     let names = []
-    for(let message of messages){
-        names.push(message.sendername);
-    }
 
-    console.log(names)
+    for(let message of messages){
+
+        if(message.isSentByMe??false){
+            names.push(message.destname);
+        }else{
+            names.push(message.sendername);
+        }
+    }   
 
     for(let name of new Set(names)){
         document.getElementById("navbar_list").appendChild(ChatName(name))
     }
 }
 
+/**
+ * Checks if a message is part of the current chat.
+ * (ie: current chat name must be either sender or recipient).
+ * @param {object} message 
+ * @returns 
+ */
+function isInCurrentChat(message, currentChat){
+    return message.destname==currentChat ||  message.sendername==currentChat
+}
 
 
