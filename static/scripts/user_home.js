@@ -1,39 +1,43 @@
+
 /**
- * On click send.
+ * Onload init.
  */
-document.getElementById("button_send_message").addEventListener("click", function (elem, event) {
-    const destname = document.getElementById("input_destname").value
-    const messageText = document.getElementById("input_message_text").value
-    document.getElementById("input_message_text").value = ""
-
-    // if sending msg to smn other than self, add own msg for display.
-    if (destname != getCookie("username")) {
-        messages.push({ isSentByMe:true, destname:destname, message_text: messageText, date: new Date().toString().split("GMT")[0] })
-    }
-
-    uploadMessage(destname, messageText)
+ window.addEventListener("load", function () {
+    window.chatname = ""
+    window.messages = []
+    window.allChatnames = []
+    checkForMessages()
 })
 
 
 /**
- * Display messages.
+ * On click send.
  */
-function displayMessages() {
+document.getElementById("button_send_message").addEventListener("click", function (elem, event) {
 
-    const currentChat = document.getElementById("input_destname").value;
-    const div_inbox = document.getElementById("div_inbox")
+    const messageText = document.getElementById("input_message_text").value
+    document.getElementById("input_message_text").value = ""
 
-    document.getElementById("title_one").innerHTML = currentChat //set title to name of chat
-
-    // if (div_inbox.childElementCount == messages.length) {  return;}//instead of messages.length, lenght of messages in CURRENT CHAT
-
-    div_inbox.innerHTML = ""
-    for (let message of messages) {
-        if(isInCurrentChat(message, currentChat)){
-            div_inbox.appendChild(ChatMsg(message))
-        }
+    // if sending msg to smn other than self, add own msg for display.
+    if (window.chatname != getCookie("username")) {
+        let newMessage = { isSentByMe: true, destname: window.chatname, message_text: messageText, date: new Date().toString().split("GMT")[0] };
+        messages.push(newMessage)
+        document.getElementById("div_inbox").appendChild(ChatMsg(newMessage))
     }
-}
+
+    uploadMessage(window.chatname, messageText)
+})
+
+
+/**
+ * On typing in a new chatname switch chat.
+ */
+document.getElementById("input_destname").addEventListener("change", function (elem, event) {
+    let newChatname = document.getElementById("input_destname").value
+    console.log("switching to chat after typing in: ", newChatname)
+    switchToChat(newChatname);
+})
+
 
 
 /**
@@ -41,25 +45,20 @@ function displayMessages() {
  * Recursive function that calls itself every n milliseconds.
  */
 function checkForMessages() {
- 
+
     downloadMessages()
-    .then((newMessages)=>{window.messages = window.messages.concat(newMessages);   })
-    
-    displayChatNames()
-    displayMessages()
-    
+        .then((newMessages) => {
+            window.messages = window.messages.concat(newMessages);
+            for(let newMessage of newMessages){
+                document.getElementById("div_inbox").appendChild(ChatMsg(newMessage))
+            }
+            displayChatNames(newMessages)
+        })
+
     const millisecs = 2000
     setTimeout(checkForMessages, millisecs);
 }
 
-
-/**
- * Onload init.
- */
-window.addEventListener("load", function () {
-    window.messages = []
-    checkForMessages()
-})
 
 
 /**
@@ -81,7 +80,7 @@ function createElementFromHTML(htmlString) {
 function ChatName(name) {
     let html = `
     <div class="chat_name">
-    <input type="button" onclick="displayChatByName('${name}')" value="${name}"></input>
+    <input type="button" onclick="switchToChat('${name}')" value="${name}"></input>
     </div>
     `
     return createElementFromHTML(html)
@@ -95,8 +94,8 @@ function ChatName(name) {
  */
 function ChatMsg(message) {
 
-    if(message.isSentByMe??false){
-        return createElementFromHTML(`<div><p>${message.message_text}</p></div>`)
+    if (message.isSentByMe ?? false) {
+        return createElementFromHTML(`<div class="chat_msg"><h2 style="margin-right: 200px; margin-left: 50px; margin-top: 10px;">${message.message_text}</h2></div>`)
     }
 
     //useful constants 
@@ -107,9 +106,9 @@ function ChatMsg(message) {
     let html = `
     <div class="chat_msg">
     
-      <h2 style="margin-right: 200px; margin-left: 50px; margin-top: 10px;">${message.message_text}</h2>
+      <h2 style="margin-right: 200px; margin-left: 60px; margin-top: 10px;">${message.message_text}</h2>
 
-        <div style="margin-right: 10px;">
+        <div>
           <p>${message.date}</p>        
           <div style="display: flex; flex-direction: row;">
             <p> from: ${message.sendername}</p>
@@ -124,38 +123,92 @@ function ChatMsg(message) {
     return createElementFromHTML(html)
 }
 
-function displayChatByName(name) {
-    document.getElementById("input_destname").value = name
-}
 
 
-function displayChatNames(){
-    document.getElementById("navbar_list").innerHTML=""
+/**
+ * Adds new chatnames to the navbar based on incoming messages.
+ * @param {object[]} messages 
+ */
+function displayChatNames(messages) {
 
-    let names = []
+    let newChatNames = []
 
-    for(let message of messages){
+    for (let message of messages) {
 
-        if(message.isSentByMe??false){
-            names.push(message.destname);
-        }else{
-            names.push(message.sendername);
+        if (message.isSentByMe ?? false) {
+            newChatNames.push(message.destname);
+        } else {
+            newChatNames.push(message.sendername);
         }
-    }   
+    }
 
-    for(let name of new Set(names)){
+    // remove chatnames that are already in allChatnames
+    newChatNames = newChatNames.filter(name => !window.allChatnames.includes(name)) 
+
+    window.allChatnames = window.allChatnames.concat(newChatNames)
+
+    for (let name of new Set(newChatNames)) {
         document.getElementById("navbar_list").appendChild(ChatName(name))
     }
 }
 
+
+
+
 /**
- * Checks if a message is part of the current chat.
- * (ie: current chat name must be either sender or recipient).
- * @param {object} message 
- * @returns 
+ * Called when chat button is pressed or chat name is typed in.
+ * Has to remove all currently displayed messages and only display the ones from the current chat.
+ * @param {string} chatname 
  */
-function isInCurrentChat(message, currentChat){
-    return message.destname==currentChat ||  message.sendername==currentChat
+function switchToChat(chatname) {
+
+    if(window.chatname == chatname){
+        return;
+    }
+
+    //set current chatname
+    window.chatname = chatname;
+
+    //change displayed chat name
+    document.getElementById("title_one").innerHTML = chatname
+
+    //clear displayed messages
+    const div_inbox = document.getElementById("div_inbox")
+    div_inbox.innerHTML = ""
+
+    //get and display only messages from 'chatname'
+    let toDisplay = []
+    for (let message of window.messages) {
+        if (message.destname == chatname || message.sendername == chatname) {
+            toDisplay.push(message);
+        }
+    }
+
+    for (let message of toDisplay) {
+        div_inbox.appendChild(ChatMsg(message))
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
