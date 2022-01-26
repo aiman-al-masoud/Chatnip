@@ -51,16 +51,23 @@ function authenticate(username, password) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     })
-        .then((res) => { return res.json(); })
 
-        .then((data) => {
+    //if request is bad, display the error message from the sever and break the chain.
+    .then((res)=> {if(!res.ok){res.text().then(((text)=> {alert(text); return null;}   )) }else{return res;}   })
+    
+    .then((res) => { return res.json(); })
+
+    .then((data) => {
             console.log(data["session_id"])
             setCookie("session_id", data["session_id"]);
             setCookie("username", username);
         })
-        .then((res) => {
+    .then((res) => {
             window.location.href = "/user_home" //redirect user to /user_home
-        })
+    })
+
+    
+
 
 }
 
@@ -84,7 +91,10 @@ function createUser(username, password, keypass, dict_fill_in_the_blanks) {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
-    }).then((res) => { alert("Signup Successful! Please log in.") })// TODO remove
+    })
+    //if request is bad, display the error message from the sever and break the chain.
+    .then((res)=> {if(!res.ok){res.text().then(((text)=> {alert(text); return null;}   )) }else{return res;}   })
+    .then((res)=>{  if(res){ window.location.href = "/login_page";}})
 
 }
 

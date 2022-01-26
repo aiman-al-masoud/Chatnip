@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, redirect
 from flask_cors import CORS
 import json
 import utils as U
@@ -41,7 +41,6 @@ def on_signup_page():
     return render_template("signup_page.html", sentence=U.random_fill_in_the_blanks_question())
     
 
-
 @app.route("/user_home", methods=["GET", "POST"])
 def on_user_home():
     """
@@ -55,12 +54,11 @@ def on_user_home():
 
     app.logger.info(f"on_user_home: Username: {username}, Session Id: {session_id}")
     
-
     if U.session_id_expired(username):
-        return "session expired!"# fail
+        return redirect("/login_page")
 
     if U.get_session_id(username)!=session_id:
-        return "wrong session id!"# fail
+        return redirect("/login_page")
 
     return render_template("user_home.html")
 
@@ -72,10 +70,10 @@ def on_settings():
     session_id = request.cookies["session_id"]
 
     if U.session_id_expired(username):
-        return "session expired!"# fail
+        return redirect("/login_page")
 
     if U.get_session_id(username)!=session_id:
-        return "wrong session id!"# fail
+        return redirect("/login_page")
     
     return render_template("settings.html")
 
@@ -98,17 +96,17 @@ def on_create_user():
 
     if dict_fill_in_the_blanks["answer"] != U.get_fill_in_the_blanks_answer(dict_fill_in_the_blanks["question"]):
         app.logger.info(f"on_create_user: a bot just tried to sign up and was stopped.")
-        return "You're a darn bot."
+        return "You may be a bot!", 400 # bad request 
 
     if U.user_exists(username):
-        return f"Username '{username}' is already taken!" # fail
+        return f"Username '{username}' is already taken!", 400 # bad request 
     
     salt = U.generate_salt()
     salted_and_hashed_password = U.hash_password(password+salt)
 
     U.create_user(username, salted_and_hashed_password , salt , public_key)
     
-    return "" # success
+    return "OK" # success
 
 
 
@@ -124,14 +122,14 @@ def on_authenticate():
     password_attempt = request.json["password"]
 
     if not U.user_exists(username):
-        return "ERROR: INVALID USERNAME!"
+        return f"Username '{username}' doesn't exist!", 400 # bad request 
 
     if U.get_hashed_password(username)==U.hash_password(password_attempt+U.get_salt(username)):
         session_id = U.generate_session_id()
         U.set_session_id(username, session_id)
         return json.dumps({"session_id": session_id})
     else:
-        return "ERROR, INVALID USERNAME OR PASSWORD!"
+        return f"Wrong password!", 400 # bad request 
 
     
 @app.route("/upload_message", methods=["POST", "GET"])
@@ -149,12 +147,10 @@ def on_upload_message():
     
 
     if U.session_id_expired(username):
-        return "" # fail
+        return redirect("/login_page")
 
     if U.get_session_id(username)!=session_id:
-        return "" # fail
-
-    
+        return redirect("/login_page")
 
     U.append_to_inbox(destname, {"sender":username, "message_text":message_text, "timestamp":timestamp})
     
@@ -172,10 +168,10 @@ def on_download_messages():
     session_id = request.cookies["session_id"]
 
     if U.session_id_expired(username):
-        return "" # fail
+        return redirect("/login_page")
 
     if U.get_session_id(username)!=session_id:
-        return "" # fail
+        return redirect("/login_page")
 
     inbox = U.get_inbox(username)
     U.del_inbox(username)
@@ -194,11 +190,6 @@ def on_get_public_key():
 
 
 
-
-
-
-
-
 @app.route("/delete_user", methods=["POST", "GET"])
 def on_delete_user():
     """
@@ -209,12 +200,14 @@ def on_delete_user():
     session_id = request.cookies["session_id"]
 
     if U.session_id_expired(username):
-        return "" # fail
+        return redirect("/login_page")
 
     if U.get_session_id(username)!=session_id:
-        return "" # fail
+        return redirect("/login_page")
     
     U.delete_user(username)
+
+    return "OK" # success
 
 
 @app.route("/reset_password", methods=["POST", "GET"])
@@ -229,19 +222,20 @@ def on_reset_password():
     new_password = request.json["new_password"]
 
     if U.session_id_expired(username):
-        return "" # fail
+        return redirect("/login_page")
 
     if U.get_session_id(username)!=session_id:
-        return "" # fail
+        return redirect("/login_page")
     
     if U.get_hashed_password(username)!=U.hash_password(old_password+U.get_salt(username)):
-        return "" # fail
+        return "Wrong password!", 400 # bad request
     
     salt = U.generate_salt()
     U.reset_password(username,  U.hash_password(new_password+salt), salt)
 
-    
+    return "OK" # success
 
+    
 @app.route("/reset_public_key", methods=["POST", "GET"])
 def on_reset_public_key():
     """
@@ -254,15 +248,17 @@ def on_reset_public_key():
     new_public_key = request.json["new_public_key"]
 
     if U.session_id_expired(username):
-        return "" # fail
+        return redirect("/login_page")
 
     if U.get_session_id(username)!=session_id:
-        return "" # fail
+        return redirect("/login_page")
 
     if U.get_hashed_password(username)!=U.hash_password(password+U.get_salt(username)):
-        return "" #fail
+        return "Wrong password!", 400 # bad request
 
     U.reset_public_key(username, new_public_key)
+
+    return "OK" # success
 
 
 
