@@ -169,7 +169,7 @@ function switchToChat(chatname) {
     window.chatname = chatname;
 
     //change displayed chat name
-    document.getElementById("title_one").innerHTML = chatname
+    document.getElementById("title_chat_name").innerHTML = chatname
 
     //clear displayed messages
     const div_inbox = document.getElementById("div_inbox")
