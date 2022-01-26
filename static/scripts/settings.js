@@ -36,3 +36,11 @@ document.getElementById("button_delete_account").addEventListener("click", funct
 document.getElementById("button_delete_local_storage_messages").addEventListener("click", function(){
     localStorage.removeItem("messages")
 })
+
+
+
+document.getElementById("button_save_messages").addEventListener("click", function(){
+    saveToComp(localStorage.getItem("messages"), `messages_backup_${new Date()}`, "text/plain")
+})
+
+
