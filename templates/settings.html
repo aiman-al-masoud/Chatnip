@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/stylesheets/style.css')}}">
+    <title>Settings</title>
+</head>
+<body>
+    
+    <h1>Account Settings</h1>
+
+    <h2>Reset Password</h2>
+
+    Old Password:
+    <br>
+    <input type="password" id="input_old_password">
+    <br>
+    New Password:
+    <br>
+    <input type="password" id="input_new_password">
+    <br>
+    <input type="button" value="reset password" id="button_reset_password">
+
+
+
+    <h2>Reset Public Key</h2>
+
+    Account Password:
+    <br>
+    <input type="password" id="input_password">
+    <br>
+    New passphrase to generate your new key-pair:
+    <br>
+    <input type="password" id="input_new_keypass">
+    <br>
+    <input type="button" value="reset public key" id="button_reset_public_key">
+
+    
+    <h2>Delete Account</h2>
+
+    <input type="button" value="delete my account" id="button_delete_account">
+
+
+    <h1>Local Storage</h1>
+
+    <input type="button" value="Delete all messages from local storage" id="button_delete_local_storage_messages">
+
+
+
+    <script src="{{url_for('static', filename='/scripts/cryptico/cryptico.min.js')}}"> </script>
+    <script src="{{url_for('static', filename='/scripts/apis.js')}}"> </script>
+    <script src="{{url_for('static', filename='/scripts/settings.js')}}"> </script>
+
+
+</body>
+</html>

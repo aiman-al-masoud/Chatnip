@@ -76,8 +76,6 @@ def get_inbox(username):
     except:
         return []
 
-    
-
 
 def del_inbox(username):
 
@@ -87,8 +85,6 @@ def del_inbox(username):
     t = __message_table()
     t = t[(t.destname!=username)]
     t.to_csv(__MESSAGE_PATH, index=False)
-
-
 
 
 def get_session_id(username):
@@ -146,9 +142,6 @@ def get_salt(username):
     return t.loc[ (t.username==username)  , "salt"].to_list()[0]
     
 
-# def set_salt(username, salt):
-#     pass
-
 def generate_salt():
     return secrets.token_hex(8)
 
@@ -163,6 +156,33 @@ def get_fill_in_the_blanks_answer(question):
     """
     df = pd.read_csv("./res/fill_in_the_blanks.csv",sep="|")
     return df[df["question"]==question]["answer"].to_list()[0] 
+
+
+
+
+
+
+def reset_password(username, hashed_password, salt):
+    t = __users_table()
+    t.loc[ (t.username==username)  , "hashed_password"] = hashed_password
+    t.loc[ (t.username==username)  , "salt"] = salt
+    t.to_csv(__USERS_PATH, index=False)
+
+def reset_public_key(username, public_key):
+    t = __users_table()
+    t.loc[ (t.username==username)  , "public_key"] = public_key
+    t.to_csv(__USERS_PATH, index=False)
+
+def delete_user(username):
+    u = __users_table()
+    u = u[u.username!=username]
+    m = __message_table()
+    m = m[(m.sendername!=username)&(m.destname!=username)]
+    u.to_csv(__USERS_PATH, index=False)
+    m.to_csv(__MESSAGE_PATH, index=False)
+
+
+
 
 
 # ----- methods that depend on the implementation --------

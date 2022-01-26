@@ -65,6 +65,21 @@ def on_user_home():
     return render_template("user_home.html")
 
 
+@app.route("/settings", methods=["GET", "POST"])
+def on_settings():
+    # get from cookies
+    username = request.cookies["username"]
+    session_id = request.cookies["session_id"]
+
+    if U.session_id_expired(username):
+        return "session expired!"# fail
+
+    if U.get_session_id(username)!=session_id:
+        return "wrong session id!"# fail
+    
+    return render_template("settings.html")
+
+
 
 
 @app.route("/create_user", methods=["GET", "POST"])
@@ -178,6 +193,76 @@ def on_get_public_key():
     return json.dumps({"public_key" : U.get_public_key(username) })
 
 
+
+
+
+
+
+
+@app.route("/delete_user", methods=["POST", "GET"])
+def on_delete_user():
+    """
+    Api:
+    """
+    # get from cookies
+    username = request.cookies["username"] 
+    session_id = request.cookies["session_id"]
+
+    if U.session_id_expired(username):
+        return "" # fail
+
+    if U.get_session_id(username)!=session_id:
+        return "" # fail
+    
+    U.delete_user(username)
+
+
+@app.route("/reset_password", methods=["POST", "GET"])
+def on_reset_password():
+    """
+    Api:
+    """
+    # get from cookies
+    username = request.cookies["username"] 
+    session_id = request.cookies["session_id"]    
+    old_password = request.json["old_password"]
+    new_password = request.json["new_password"]
+
+    if U.session_id_expired(username):
+        return "" # fail
+
+    if U.get_session_id(username)!=session_id:
+        return "" # fail
+    
+    if U.get_hashed_password(username)!=U.hash_password(old_password+U.get_salt(username)):
+        return "" # fail
+    
+    salt = U.generate_salt()
+    U.reset_password(username,  U.hash_password(new_password+salt), salt)
+
+    
+
+@app.route("/reset_public_key", methods=["POST", "GET"])
+def on_reset_public_key():
+    """
+    Api:
+    """
+    # get from cookies
+    username = request.cookies["username"] 
+    session_id = request.cookies["session_id"]
+    password = request.json["password"]
+    new_public_key = request.json["new_public_key"]
+
+    if U.session_id_expired(username):
+        return "" # fail
+
+    if U.get_session_id(username)!=session_id:
+        return "" # fail
+
+    if U.get_hashed_password(username)!=U.hash_password(password+U.get_salt(username)):
+        return "" #fail
+
+    U.reset_public_key(username, new_public_key)
 
 
 
