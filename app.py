@@ -78,8 +78,6 @@ def on_settings():
     return render_template("settings.html")
 
 
-
-
 @app.route("/create_user", methods=["GET", "POST"])
 def on_create_user():
 

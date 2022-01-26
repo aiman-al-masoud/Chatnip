@@ -11,8 +11,16 @@ body{
 .chat_name{
     margin: 3px;
     padding: 3px;
+    padding-left: 30px;
+    padding-right: 30px;
     text-align: center;
+    border-radius: 10px;
+    border: 2px black ;
+    border: double;
+    
 }
+
+
 
 .chat_msg{
     border : solid black 1px;
@@ -43,7 +51,7 @@ nav{
     float: left;
     background: lightblue;
     list-style-type: none;
-    width: 100px;
+    width: 150px;
     height: 250px;
     position: relative;
     border: solid 1px black;

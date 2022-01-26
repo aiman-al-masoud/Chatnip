@@ -89,9 +89,9 @@ function createElementFromHTML(htmlString) {
  */
 function ChatName(name) {
     let html = `
-    <div class="chat_name">
-    <input class="awesome_button" type="button" onclick="switchToChat('${name}')" value="${name}"></input>
-    </div>
+    
+    <input class="chat_name " type="button" onclick="switchToChat('${name}')" value="${name}"></input>
+    
     `
     return createElementFromHTML(html)
 }
