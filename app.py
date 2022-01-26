@@ -271,7 +271,6 @@ def on_reset_public_key():
         return "Wrong password!", 400 # bad request
 
     U.reset_public_key(username, new_public_key)
-
     return "OK" # success
 
 

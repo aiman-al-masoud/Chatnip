@@ -100,15 +100,27 @@ footer{
 }
 
 .chat_input_bar{
-    background-color:transparent;
+    /* background:transparent; */
     clear:both;
     text-align:center;
-    position:sticky;
+    /* position:sticky; */
     display: flex; 
     flex-direction: row;
     float: right;
     margin : 10px;
+    /* width: 100%; */
 }
+
+.message_input_bar{
+    border-radius: 25px;
+    padding: 5px;
+    font-size: 20px;
+    width: 500px;
+    border-radius: 25px;
+    font-size: 20px;
+}
+
+
 
 
 .text_input_box{
@@ -116,6 +128,7 @@ footer{
     padding: 5px;
     font-size: 20px;
 }
+
 
 
 
@@ -134,6 +147,7 @@ footer{
     color: red;
     border-radius: 20px;
     margin: 10px;
+    margin-top: 30px;
 }
 
 
