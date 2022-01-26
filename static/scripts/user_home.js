@@ -24,15 +24,16 @@ document.getElementById("button_send_message").addEventListener("click", functio
     const messageText = document.getElementById("input_message_text").value
     document.getElementById("input_message_text").value = ""
 
+    uploadMessage(window.chatname, messageText).then((res)=>{
+
     // if sending msg to smn other than self, add own msg for display.
     if (window.chatname != getCookie("username")) {
         let newMessage = { isSentByMe: true, destname: window.chatname, message_text: messageText, date: new Date().toString().split("GMT")[0] };
         messages.push(newMessage)
         document.getElementById("div_inbox").appendChild(ChatMsg(newMessage))
         displayChatNames([newMessage])
-    }
-    
-    uploadMessage(window.chatname, messageText)
+    }})
+
 })
 
 

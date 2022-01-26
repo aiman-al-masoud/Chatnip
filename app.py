@@ -184,8 +184,11 @@ def on_get_public_key():
     """
     Api: Returns the public key of any user.
     """
-
     username = request.json["username"]
+
+    if not U.user_exists(username):
+        return f"Username '{username}' doesn't exist!", 400 # bad request 
+    
     return json.dumps({"public_key" : U.get_public_key(username) })
 
 

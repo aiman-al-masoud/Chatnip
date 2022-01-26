@@ -106,12 +106,18 @@ function createUser(username, password, keypass, dict_fill_in_the_blanks) {
  */
 function uploadMessage(destname, message_text) {
 
-    fetch("/get_public_key", {
+    return fetch("/get_public_key", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: destname })
     })
+
+
+    //if request is bad, display the error message from the sever and break the chain.
+    .then((res)=> {if(!res.ok){res.text().then(((text)=> {alert(text); return null;}   )) }else{return res;}   })
+    
     .then((res)=>{return res.json();})
+
     .then((pubkdata)=>{
 
         let encryptedMsg = cryptico.encrypt(message_text, pubkdata["public_key"], cryptico.generateRSAKey(localStorage.getItem("keypass"), parseInt(localStorage.getItem("bits")))  ).cipher;
