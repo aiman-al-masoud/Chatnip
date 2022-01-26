@@ -1,5 +1,5 @@
 body{
-    background: lightcyan;
+    background: darkslategray;
     font-family: sans-serif;
 }
 
@@ -45,7 +45,27 @@ section{
     float: right;
 }
 
-nav{
+
+.top_nav_bar{
+    float: top;
+    background: black;
+    padding: 10px;
+    border: double red 4px;
+    border-radius: 20px;
+}
+
+.navbar_button{
+    border-radius: 25px;
+    padding: 5px;
+    background-color: red;
+    border-radius: 20px;
+}
+
+
+
+
+
+.chats_bar{
     padding: 40px;
     margin: 10px;
     float: left;
@@ -54,9 +74,11 @@ nav{
     width: 150px;
     height: 250px;
     position: relative;
-    border: solid 1px black;
+    border:double 5px red;
     border-radius: 25px;
 }
+
+
 
 
 footer{

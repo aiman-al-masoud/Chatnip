@@ -31,7 +31,20 @@ def on_login_page():
     """
     Render the login page.
     """
+
+    # try:
+    #      username = request.cookies["username"]
+    #      session_id = request.cookies["session_id"]
+    # except:
+    #     return render_template("login_page.html")
+    
+    # # redirect to user_home if session is active
+    # if ( not U.session_id_expired(username) )   and U.get_session_id(username)==session_id :
+    #     return redirect("/user_home")    
+
     return render_template("login_page.html")
+
+
 
 @app.route("/signup_page", methods=["GET", "POST"])
 def on_signup_page():

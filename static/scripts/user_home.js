@@ -191,6 +191,11 @@ function switchToChat(chatname) {
 }
 
 
+document.getElementById("button_logout").addEventListener("click", function(){
+    setCookie("session_id", "")
+    location.href='/login_page'
+})
+
 
 
 

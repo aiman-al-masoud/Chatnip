@@ -11,8 +11,14 @@
 <body>
 
 
+    <nav class="top_nav_bar" id="top_nav_bar">
+        <button id="button_logout" class="navbar_button" type="button">Log Out</button>    
+        <button class="navbar_button" onclick="location.href='/settings'" type="button">Settings</button>    
+    </nav>
 
-    <nav id="navbar"> 
+
+
+    <nav class="chats_bar" id="chats_bar"> 
         <h3>Your Chats:</h3>
         <div style="overflow-y: auto; height: 100px;"  id="navbar_list"></div>
         <div style="position: absolute; bottom: 10;"><label for="input_destname">Open chat:</label> <input type="text" name="" id="input_destname" class="text_input_box" size=10></div>
@@ -20,7 +26,6 @@
 
 
     <h1 id="title_one"></h1>
-
     
     <div id="div_inbox" class="scroll_bar"></div>
 
@@ -30,7 +35,6 @@
 
 
     <footer>
-        <button class="awesome_button" onclick="location.href='/settings'" type="button">Settings</button>    
         <p>Aiman Al Masoud © 2022 - This website's source is free software, licensed under GNU GPL v3. <a href="/about">More Info.</a> </p>
     </footer>
 
