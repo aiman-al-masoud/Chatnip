@@ -113,22 +113,12 @@ function ChatMsg(message) {
     const v_txt = "This message is verified"; const f_txt = "Caution! This message is forged!"; const u_txt = "This message wasn't signed. Could be forged.";
 
     let html = `
-    <div class="chat_msg    sent_by_others">
-    
-      <h2 style="margin-right: 200px; margin-left: 60px; margin-top: 10px;">${message.message_text}</h2>
-
-        <div>
-          <p>${message.date}</p>        
-          <div style="display: flex; flex-direction: row;">
-            <p> from: ${message.sendername}</p>
-           <div>
-           <img  src="${message.signature == v ? v_img : (message.signature == f ? f_img : u_img)}"
-           title= "${message.signature == v ? v_txt : (message.signature == f ? f_txt : u_txt)}"
-           /img>
-           </div>
-          </div>
-        </div>   
-
+    <div class=" chat_msg  sent_by_others ">
+      <h2  style="margin:0px;">${message.message_text}</h2>
+      <p style="margin:0px;">${message.date}</p>        
+      <p  style="margin:0px;"> from: ${message.sendername}</p>
+      <img  style="margin:0px;" src="${message.signature == v ? v_img : (message.signature == f ? f_img : u_img)}"
+      title= "${message.signature == v ? v_txt : (message.signature == f ? f_txt : u_txt)}"/img>
     </div>
     `
     return createElementFromHTML(html)
