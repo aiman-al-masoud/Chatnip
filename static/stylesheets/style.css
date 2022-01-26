@@ -9,15 +9,18 @@ body{
 }
 
 .chat_name{
-    margin: 3px;
-    padding: 3px;
     padding-left: 30px;
     padding-right: 30px;
     text-align: center;
     border-radius: 10px;
     border: 2px black ;
     border: double;
-    
+    width: 100%;
+}
+
+.chat_name:hover{
+    color: black;
+    background: orange;
 }
 
 
@@ -52,12 +55,14 @@ section{
     padding: 10px;
     border: double red 4px;
     border-radius: 20px;
+    position: relative;
+    margin-bottom: 10px;
 }
 
 .navbar_button{
     border-radius: 25px;
     padding: 5px;
-    background-color: red;
+    background-color: orange;
     border-radius: 20px;
 }
 
@@ -66,16 +71,18 @@ section{
 
 
 .chats_bar{
-    padding: 40px;
+    padding: 10px;
     margin: 10px;
     float: left;
     background: lightblue;
     list-style-type: none;
     width: 150px;
-    height: 250px;
+    height: 300px;
     position: relative;
     border:double 5px red;
     border-radius: 25px;
+    background: black;
+    color: red;
 }
 
 
@@ -107,12 +114,9 @@ footer{
 .text_input_box{
     border-radius: 25px;
     padding: 5px;
+    font-size: 20px;
 }
 
-.awesome_button{
-    border-radius: 25px;
-    padding: 5px;
-}
 
 
 .center{
@@ -131,4 +135,38 @@ footer{
     border-radius: 20px;
     margin: 10px;
 }
+
+
+
+
+.awesome_button{
+    border-radius: 25px;
+    padding: 5px;
+    background-color: orange;
+    border-radius: 20px;
+    margin-top: 5px;
+    font-size: large;
+    
+}
+
+.dangerous_button{
+    border-radius: 25px;
+    padding: 5px;
+    background-color: red;
+    border-radius: 20px;
+}
+
+.super_awesome_button{
+    border-radius: 30px;
+    padding: 5px;
+    background-color: green;
+    border-radius: 20px;
+}
+
+
+
+.awesome_button:hover{
+    background: blanchedalmond;
+}
+
 

@@ -8,6 +8,8 @@
     <title>Settings</title>
 </head>
 <body>
+
+    {% include "navbar.html" %}
     
     <h1>Account Settings</h1>
 
@@ -21,7 +23,7 @@
     <br>
     <input type="password" id="input_new_password">
     <br>
-    <input type="button" value="reset password" id="button_reset_password">
+    <input class="awesome_button" type="button" value="reset password" id="button_reset_password"/>
 
 
 
@@ -35,21 +37,22 @@
     <br>
     <input type="password" id="input_new_keypass">
     <br>
-    <input type="button" value="reset public key" id="button_reset_public_key">
+    <input class="awesome_button" type="button" value="reset public key" id="button_reset_public_key"/>
 
     
     <h2>Delete Account</h2>
 
-    <input type="button" value="delete my account" id="button_delete_account">
+    <input class="dangerous_button" type="button" value="delete my account" id="button_delete_account">
 
 
     <h1>Local Storage</h1>
 
-    <input type="button" value="Save messages to text file" id="button_save_messages">
+    <input type="button" value="Save messages as text file" id="button_save_messages" class="super_awesome_button">
+    <br>
+    <br>
+    <input class="dangerous_button" type="button" value="Delete all messages from local storage" id="button_delete_local_storage_messages">
 
-    <input type="button" value="Delete all messages from local storage" id="button_delete_local_storage_messages">
-
-
+    {% include "footer.html" %}
 
     <script src="{{url_for('static', filename='/scripts/cryptico/cryptico.min.js')}}"> </script>
     <script src="{{url_for('static', filename='/scripts/apis.js')}}"> </script>

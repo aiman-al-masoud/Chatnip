@@ -11,19 +11,21 @@
 <body>
 
 
-    <nav class="top_nav_bar" id="top_nav_bar">
-        <button id="button_logout" class="navbar_button" type="button">Log Out</button>    
-        <button class="navbar_button" onclick="location.href='/settings'" type="button">Settings</button>    
-    </nav>
 
+
+    {% include "navbar.html" %}
 
 
     <nav class="chats_bar" id="chats_bar"> 
         <h3>Your Chats:</h3>
-        <div style="overflow-y: auto; height: 100px;"  id="navbar_list"></div>
-        <div style="position: absolute; bottom: 10;"><label for="input_destname">Open chat:</label> <input type="text" name="" id="input_destname" class="text_input_box" size=10></div>
-    </nav>
+        <div style=" overflow-x: hidden; overflow-y: auto; height: 100px; width: 100%;"  id="navbar_list"></div>
+        
+        <div style="position: absolute; bottom: 5%; left: 2%;">   
+            <label for="input_destname">Open chat:</label> 
+            <input type="text" name="" id="input_destname" class="text_input_box" size=10 placeholder="trollslayer-1012">
+        </div>
 
+    </nav>
 
     <h1 id="title_one"></h1>
     
@@ -32,10 +34,7 @@
     <div class="chat_input_bar"> <input class="text_input_box" type="text" name="" id="input_message_text" placeholder="Type in a message...">  <input class="awesome_button" type="button" value="Send" id="button_send_message"> </div>
 
 
-    <footer class="footer">
-        <p>Aiman Al Masoud © 2022 - This website is free software, licensed under GNU GPL v3. <a href="/about">More Info.</a> </p>
-    </footer>
-    
+   {% include "footer.html" %}
 
     <!--hidden images, to be used by scripts-->
     <img hidden display="none" id="verified" src="{{url_for('static', filename='/icons/verified.png')}}" alt="">

@@ -1,0 +1,14 @@
+<nav class="top_nav_bar" id="top_nav_bar">
+    <button class="navbar_button" onclick="location.href='/user_home'" type="button">Home</button>
+    <button class="navbar_button" onclick="location.href='/settings'" type="button">Settings</button>
+    <button id="button_logout" class="dangerous_button" style="position: absolute; right: 2%;" type="button">Log
+        Out</button>
+</nav>
+
+
+<script>
+    document.getElementById("button_logout").addEventListener("click", function () {
+        setCookie("session_id", "")
+        location.href = '/login_page'
+    })
+</script>
