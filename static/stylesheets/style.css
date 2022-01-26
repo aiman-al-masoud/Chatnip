@@ -100,6 +100,7 @@ footer{
     display: flex; 
     flex-direction: row;
     float: right;
+    margin : 10px;
 }
 
 
@@ -120,4 +121,14 @@ footer{
 
 
 
+
+.footer{
+    float: bottom;
+    background: black;
+    padding: 10px;
+    border: double red 4px;
+    color: red;
+    border-radius: 20px;
+    margin: 10px;
+}
 
