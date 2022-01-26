@@ -20,6 +20,10 @@ document.getElementById("button_login").addEventListener("click", function (elem
     }
 
     // if keypass is null, wait till you get it from the user.
+    // if the user insists on entering with a wrong keypass, let them do it after MAX_ATTEMPTS.
+    window.attemptsCounter = 0;
+    window.MAX_ATTEMPTS = 3;
+
     if (localStorage.getItem("keypass") == null) {
         checkKeypass(username);
     } else {
@@ -47,7 +51,10 @@ function checkKeypass(username) {
         .then((res) => { return res.json(); })
         .then((pubkdata) => {
             let supposedPublicKey = cryptico.publicKeyString(cryptico.generateRSAKey(sha256.hex(keypass), parseInt(localStorage.getItem("bits"))));
-            if (supposedPublicKey != pubkdata.public_key) {
+            
+
+            if ( (supposedPublicKey != pubkdata.public_key )  &&  (window.attemptsCounter<window.MAX_ATTEMPTS)  ) {
+                window.attemptsCounter++;
                 checkKeypass(username);
             } else {
                 localStorage.setItem("keypass", sha256.hex(keypass));
