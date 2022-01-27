@@ -190,15 +190,21 @@ def get_avatar_path(username):
         return "/avatars/default/default.png"
 
 
-def reset_avatar(username, file):
+def reset_avatar(username, file):   
+    
+    delete_avatar(username)
+    _, extension = os.path.splitext(file.filename)
+    file.save(f"./static/avatars/{username}{extension}")
+
+
+def delete_avatar(username):
 
     oldpath = f"./static{get_avatar_path(username)}"
-    try: os.remove(oldpath)
-    except: pass    
-        
-    _, extension = os.path.splitext(file.filename)
-    
-    file.save(f"./static/avatars/{username}{extension}")
+    if oldpath == "./static/avatars/default/default.png":
+        return
+    os.remove(oldpath)
+      
+
 
 
 # ----- methods that depend on the implementation --------

@@ -305,6 +305,21 @@ def on_upload_avatar():
 
 
 
+@app.route("/delete_avatar", methods=["POST", "GET"])
+def on_delete_avatar():
+    
+    username = request.cookies["username"] 
+    session_id = request.cookies["session_id"]
+
+    if U.session_id_expired(username):
+        return redirect("/login_page")
+
+    if U.get_session_id(username)!=session_id:
+        return redirect("/login_page")
+    
+    U.delete_avatar(username)
+    
+    return "OK"
     
 
 

@@ -43,4 +43,6 @@ document.getElementById("button_save_messages").addEventListener("click", functi
     saveToComp(localStorage.getItem("messages"), `messages_backup_${new Date()}`, "text/plain")
 })
 
-
+document.getElementById("button_delete_avatar").addEventListener("click", function(){
+    fetch("/delete_avatar").then(function(){window.location.href="/settings"})
+})
