@@ -182,7 +182,23 @@ def delete_user(username):
     m.to_csv(__MESSAGE_PATH, index=False)
 
 
+def get_avatar_path(username):
+    try:
+        filename = [filename for filename in  os.listdir("./static/avatars") if username in filename][0]
+        return f"/avatars/{filename}"
+    except:
+        return ""
 
+
+def reset_avatar(username, file):
+
+    oldpath = f"./static{get_avatar_path(username)}"
+    try: os.remove(oldpath)
+    except: pass    
+        
+    _, extension = os.path.splitext(file.filename)
+    
+    file.save(f"./static/avatars/{username}{extension}")
 
 
 # ----- methods that depend on the implementation --------
@@ -220,6 +236,9 @@ def __message_table():
     return pd.read_csv(path)
 
 
+
+
+# print(get_avatar_path("cammerlo"))
 
 
 

@@ -1,10 +1,13 @@
+{% with avatar=avatar %}
+
 <nav class="top_nav_bar" id="top_nav_bar">
     <button class="navbar_button" onclick="location.href='/user_home'" type="button">Home</button>
     <button class="navbar_button" onclick="location.href='/settings'" type="button">Settings</button>
-    <button id="button_logout" class="dangerous_button" style="position: absolute; right: 2%;" type="button">Log
-        Out</button>
-</nav>
+    <button id="button_logout" class="dangerous_button" style="position: absolute; right: 2%;" type="button">Log-Out</button>
+    <img src= {{ url_for('static', filename= avatar ) }}   class="avatar"  style="position: absolute; right: 10%; top:4%;"      alt="avatar"  >
 
+</nav>
+{% endwith %}
 
 <script>
     document.getElementById("button_logout").addEventListener("click", function () {

@@ -3,12 +3,21 @@ from flask_cors import CORS
 import json
 import utils as U
 import logging
+# from werkzeug.utils import secure_filename
+from os.path import splitext
+
 
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 logging.basicConfig( level=logging.DEBUG, format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 CORS(app)
+
+
+UPLOAD_FOLDER = "."
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+ALLOWED_EXTENSIONS = ['png', 'jpg', 'jpeg', 'gif']
+
 
 
 @app.route("/", methods=["GET"])
@@ -73,7 +82,8 @@ def on_user_home():
     if U.get_session_id(username)!=session_id:
         return redirect("/login_page")
 
-    return render_template("user_home.html")
+    return render_template("user_home.html", avatar=U.get_avatar_path(username))
+
 
 
 @app.route("/settings", methods=["GET", "POST"])
@@ -88,7 +98,7 @@ def on_settings():
     if U.get_session_id(username)!=session_id:
         return redirect("/login_page")
     
-    return render_template("settings.html")
+    return render_template("settings.html", avatar=U.get_avatar_path(username))
 
 
 @app.route("/create_user", methods=["GET", "POST"])
@@ -275,8 +285,26 @@ def on_reset_public_key():
 
 
 
+@app.route("/upload_avatar", methods=["POST", "GET"])
+def on_upload_avatar():
+
+    username = request.cookies["username"] 
+    session_id = request.cookies["session_id"]
+
+    if U.session_id_expired(username):
+        return redirect("/login_page")
+
+    if U.get_session_id(username)!=session_id:
+        return redirect("/login_page")
+    
+    f = request.files["avatar"]
+    U.reset_avatar(username, f)
+    
+    return redirect("/settings")
 
 
+
+    
 
 
 

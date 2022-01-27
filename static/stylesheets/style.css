@@ -193,3 +193,8 @@ footer{
     float:inline-end;
 } */
 
+
+.avatar{
+    border-radius: 20px;
+    width: 60px;
+}

@@ -13,6 +13,16 @@
     
     <h1>Account Settings</h1>
 
+
+    <h2>Set Avatar</h2>
+
+    <form id="form_upload_avatar" name="form_upload_avatar" action="/upload_avatar" method="post" enctype="multipart/form-data">
+        <input type="file" name="avatar" id="avatar" class="awesome_button">
+        <input type="submit" value="change avatar" class="awesome_button">
+    </form>
+
+
+
     <h2>Reset Password</h2>
 
     Old Password:
@@ -24,8 +34,6 @@
     <input type="password" id="input_new_password" class="text_input_box">
     <br>
     <input class="awesome_button" type="button" value="reset password" id="button_reset_password"/>
-
-
 
     <h2>Reset Public Key</h2>
 
