@@ -27,7 +27,10 @@ def user_exists(username):
     """
     Returns true if username is already taken.
     """
-    return (__users_table().username == username).sum() == 1
+    try:
+        return (__users_table().username == username).sum() == 1
+    except:
+        return False     
 
 def delete_user(username):
 

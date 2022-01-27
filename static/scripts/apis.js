@@ -80,6 +80,7 @@ function authenticate(username, password) {
 function createUser(username, password, keypass, dict_fill_in_the_blanks) {
 
     localStorage.setItem("keypass", sha256.hex(keypass))
+
     
     let rsaKeyPair = cryptico.generateRSAKey(sha256.hex(keypass), parseInt(localStorage.getItem("bits")));
     let publicKey = cryptico.publicKeyString(rsaKeyPair);
@@ -94,7 +95,12 @@ function createUser(username, password, keypass, dict_fill_in_the_blanks) {
     })
     //if request is bad, display the error message from the sever and break the chain.
     .then((res)=> {if(!res.ok){res.text().then(((text)=> {alert(text); return null;}   )) }else{return res;}   })
-    .then((res)=>{  if(res){ window.location.href = "/login_page";}})
+    
+    .then((res)=>{  if(res){ 
+        setCookie("username", username)
+        window.location.href = "/login_page";
+    }})
+    
 
 }
 
