@@ -13,11 +13,11 @@
 <body class="center">
 
 
-    Username:
+    {{lang["username"]}}:
     <br>
     <input type="text" name="username" id="input_username" class="text_input_box">
     <br>
-    Password:
+    {{lang["password"]}}:
     <br>
     <input type="password" name="input_password" id="input_password" class="text_input_box"> 
     <br>
@@ -25,9 +25,9 @@
     <input id="button_login" type="button" value="Login" class="awesome_button">
     <br>
 
-    <p>Don't have an account yet? <a href="/signup_page">Sign Up</a> </p>
+    <p>{{lang["dont_have_an_account_yet"]}} <a href="/signup_page">{{lang["signup"]}}</a> </p>
     <br>
-    <a href="/">Homepage</a> 
+    <a href="/">{{lang["homepage"]}}</a> 
 
 
     {% include "footer.html" %}

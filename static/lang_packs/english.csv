@@ -6,4 +6,33 @@ enjoy|Enjoy!
 login|Login
 signup|Sign Up
 more_about_us|More About Us
-
+username|Username
+password|Password
+dont_have_an_account_yet|Don't have an account yet?
+homepage|Homepage
+password_repeat|Repeat the password:
+keypass_choose|Choose a (different) passphrase to store your encryption keys:
+keypass_why_need|(You'll need this to decrypt messages).
+please_fill_in_blanks|Please fill-in the blanks to prove you're human:
+already_have_an_account|Already have an account?
+account_settings|Account Settings
+avatar_set|Set Avatar
+avatar_change|Change Avatar
+avatar_delete|Delete Avatar
+password_old|Old Password
+password_new|New Password
+password_reset|Reset Password
+public_key_reset|Reset Public Key
+password_account|Account Password
+passphrase_new|New passphrase to generate your new key-pair:
+public_key_reset|reset public key
+account_delete|Delete Account
+delete_my_account|Delete My Account
+local_storage|Local Storage
+save_messages_as_text_file|Save messages as text file
+delete_all_messages_from_local_storage|Delete all messages from local storage
+my_home|My Home
+your_chats|Your Chats
+chat_open|Open chat:
+type_in_a_message|Type in a message...
+send|Send

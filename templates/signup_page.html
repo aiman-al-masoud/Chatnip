@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='/stylesheets/style.css')}}">
-    <title>Signup</title>
+    <title>{{lang["signup"]}}</title>
 </head>
 
 <body>
@@ -14,37 +14,37 @@
 
     <div class="center">
 
-        Username:
+        {{lang["username"]}}:
         <br>
         <input type="text" name="username" id="input_username" class="text_input_box">
         <br>
-        Password:
+        {{lang["password"]}}:
         <br>
         <input type="password" name="input_password" id="input_password" class="text_input_box">
         <br>
-        Repeat the password:
+        {{lang["password_repeat"]}}
         <br>
         <input type="password" name="input_password_repeat" id="input_password_repeat" class="text_input_box">
         <br>
         <br>
-        <p>Choose a (different) password to store your encryption keys:</p>
-        <em>(You'll need this to decrypt messages).</em>
+        <p>{{lang["keypass_choose"]}}</p>
+        <em>{{lang["keypass_why_need"]}}</em>
         <br>
         <br>
         <input type="password" name="input_keypass" id="input_keypass" class="text_input_box">
         <br>
         <br>
         <br>
-        <h3>Plase fill-in the blanks to prove you're human:</h3>
+        <h3>{{lang["please_fill_in_blanks"]}}</h3>
         <p id="question_fill_in_the_blanks">{{sentence}}</p>
         <input type="text" name="fill_in_the_blanks" id="fill_in_the_blanks" class="text_input_box">
         <br>
         <br>
         <input id="button_signup" type="button" value="Signup" class="awesome_button">
         <br>
-        <p>Already have an account? <a href="/login_page">Log-in</a> </p>
+        <p>{{lang["already_have_an_account"]}} <a href="/login_page">{{lang["login"]}}</a> </p>
         <br>
-        <a href="/">Homepage</a>
+        <a href="/">{{lang["homepage"]}}</a>
 
     </div>
 

@@ -11,55 +11,56 @@
 
     {% include "navbar.html" %}
     
-    <h1>Account Settings</h1>
+    <h1>{{lang["account_settings"]}}</h1>
 
 
-    <h2>Set Avatar</h2>
+    <h2>{{lang["avatar_set"]}}</h2>
 
     <form id="form_upload_avatar" name="form_upload_avatar" action="/upload_avatar" method="post" enctype="multipart/form-data">
         <input type="file" name="avatar" id="avatar" class="awesome_button" required>
-        <input type="submit" value="change avatar" class="awesome_button">
-        <input id="button_delete_avatar" type="button" value="delete avatar" class="dangerous_button">
+        <input type="submit" value="{{lang['avatar_change']}}" class="awesome_button">
+        <input id="button_delete_avatar" type="button" value="{{lang['avatar_delete']}}" class="dangerous_button">
     </form>
 
 
 
     <h2>Reset Password</h2>
 
-    Old Password:
+    {{lang["password_old"]}}
     <br>
     <input type="password" id="input_old_password" class="text_input_box">
     <br>
-    New Password:
+    {{lang["password_new"]}}
     <br>
     <input type="password" id="input_new_password" class="text_input_box">
     <br>
-    <input class="awesome_button" type="button" value="reset password" id="button_reset_password"/>
+    <input class="awesome_button" type="button" value="{{lang['password_reset']}}" id="button_reset_password"/>
 
-    <h2>Reset Public Key</h2>
+    <h2>{{lang["public_key_reset"]}}</h2>
 
-    Account Password:
+    {{lang["password_account"]}}
     <br>
     <input type="password" id="input_password" class="text_input_box">
     <br>
-    New passphrase to generate your new key-pair:
+
+    {{lang["passphrase_new"]}}
     <br>
     <input type="password" id="input_new_keypass" class="text_input_box"/>
     <br>
-    <input class="awesome_button" type="button" value="reset public key" id="button_reset_public_key"/>
+    <input class="awesome_button" type="button" value="{{lang['public_key_reset']}} " id="button_reset_public_key"/>
 
     
-    <h2>Delete Account</h2>
+    <h2>{{lang["account_delete"]}}</h2>
 
-    <input class="dangerous_button" type="button" value="delete my account" id="button_delete_account">
+    <input class="dangerous_button" type="button" value="{{lang['delete_my_account']}}" id="button_delete_account">
 
 
-    <h1>Local Storage</h1>
+    <h1>{{lang["local_storage"]}}</h1>
 
-    <input type="button" value="Save messages as text file" id="button_save_messages" class="super_awesome_button">
+    <input type="button" value= "{{lang['save_messages_as_text_file']}}" id="button_save_messages" class="super_awesome_button">
+    <br> 
     <br>
-    <br>
-    <input class="dangerous_button" type="button" value="Delete all messages from local storage" id="button_delete_local_storage_messages">
+    <input class="dangerous_button" type="button" value= "{{lang['delete_all_messages_from_local_storage']}}" id="button_delete_local_storage_messages">
 
     {% include "footer.html" %}
 
