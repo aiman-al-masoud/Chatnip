@@ -162,9 +162,6 @@ def get_fill_in_the_blanks_answer(question):
 
 
 
-
-
-
 def reset_password(username, hashed_password, salt):
     t = __users_table()
     t.loc[ (t.username==username)  , "hashed_password"] = hashed_password

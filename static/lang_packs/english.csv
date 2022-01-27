@@ -36,3 +36,14 @@ your_chats|Your Chats
 chat_open|Open chat:
 type_in_a_message|Type in a message...
 send|Send
+privacy|Privacy
+what_i_need_question|What do I need to create an account here?
+what_i_need_answer|Just a plain ASCII username, a password to log-in, and another password to create your encryption keys.
+what_cookies_question|What kind of cookies does this website need to operate?
+what_cookies_answer|Your username and the current session-id and your preferred language
+license_terms_obtain|You can obtain the full terms of the license here:
+source_code_at|The source-code is available at:
+how_it_works|How it works
+
+
+
