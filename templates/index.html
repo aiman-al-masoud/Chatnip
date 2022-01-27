@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,12 +8,13 @@
     <link rel="stylesheet" href="{{url_for('static', filename='/stylesheets/style.css')}}">
     <title>Welcome</title>
 </head>
+
 <body class="center">
 
-    
+
     <h1>{{lang["welcome"]}}</h1>
 
-    
+
     <p>{{lang["short_description"]}}</p>
 
     <p><em>{{lang["enjoy"]}}</em></p>
@@ -27,7 +29,19 @@
     <br>
     <br>
 
-    {% include  "footer.html" %}
+    {% include "language_select.html" %}
+   
+
+    <br>
+    <br>
+    <br>
+
+    {% include "footer.html" %}
+
+
+
+
 
 </body>
+
 </html>
