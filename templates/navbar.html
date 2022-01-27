@@ -5,6 +5,14 @@
     <button class="navbar_button" onclick="location.href='/settings'" type="button">Settings</button>
     <button id="button_logout" class="dangerous_button" style="position: absolute; right: 2%;" type="button">Log-Out</button>
     <img src= {{ url_for('static', filename= avatar ) }}   class="avatar"  style="position: absolute; right: 10%; top:4%;"      alt="avatar"  >
+    
+    <select name="select_language" id="select_language">
+        
+        <!--Put a template-for here, for each lang pack file-->
+        <option value="english">english</option>
+        <option value="italian">italian</option>
+
+    </select>
 
 </nav>
 {% endwith %}
@@ -14,4 +22,14 @@
         setCookie("session_id", "")
         location.href = '/login_page'
     })
+
+    document.getElementById("select_language").addEventListener("change", function(){
+        setCookie("language", document.getElementById("select_language").value)
+    })
+
+    window.addEventListener("load", function(){
+        document.getElementById("select_language").value = getCookie("language")
+    })
+
+
 </script>

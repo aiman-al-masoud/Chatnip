@@ -25,14 +25,24 @@ def on_index():
     """
     Render the website's homepage.
     """
-    return render_template("index.html")
+
+    try: lang = request.cookies["language"]
+    except: lang = "english"
+
+    return render_template("index.html" , lang=U.lang_pack(lang) )
+
+
 
 @app.route("/about", methods=["GET"])
 def on_about():
     """
     Render the 'about' page.
     """
-    return render_template("about.html")
+
+    try: lang = request.cookies["language"]
+    except: lang = "english"
+
+    return render_template("about.html"  , lang=U.lang_pack(lang) )
 
 
 @app.route("/login_page", methods=["GET", "POST"])
@@ -41,17 +51,11 @@ def on_login_page():
     Render the login page.
     """
 
-    # try:
-    #      username = request.cookies["username"]
-    #      session_id = request.cookies["session_id"]
-    # except:
-    #     return render_template("login_page.html")
-    
-    # # redirect to user_home if session is active
-    # if ( not U.session_id_expired(username) )   and U.get_session_id(username)==session_id :
-    #     return redirect("/user_home")    
 
-    return render_template("login_page.html")
+    try: lang = request.cookies["language"]
+    except: lang = "english"
+
+    return render_template("login_page.html", lang=U.lang_pack(lang))
 
 
 
@@ -60,7 +64,11 @@ def on_signup_page():
     """
     Render the signup page.
     """
-    return render_template("signup_page.html", sentence=U.random_fill_in_the_blanks_question())
+
+    try: lang = request.cookies["language"]
+    except: lang = "english"
+    
+    return render_template("signup_page.html", sentence=U.random_fill_in_the_blanks_question(), lang=U.lang_pack(lang))
     
 
 @app.route("/user_home", methods=["GET", "POST"])
@@ -82,7 +90,11 @@ def on_user_home():
     if U.get_session_id(username)!=session_id:
         return redirect("/login_page")
 
-    return render_template("user_home.html", avatar=U.get_avatar_path(username))
+    
+    try: lang = request.cookies["language"]
+    except: lang = "english"
+
+    return render_template("user_home.html", avatar=U.get_avatar_path(username), lang=U.lang_pack(lang))
 
 
 
@@ -97,8 +109,12 @@ def on_settings():
 
     if U.get_session_id(username)!=session_id:
         return redirect("/login_page")
+
     
-    return render_template("settings.html", avatar=U.get_avatar_path(username))
+    try: lang = request.cookies["language"]
+    except: lang = "english"
+    
+    return render_template("settings.html", avatar=U.get_avatar_path(username), lang=U.lang_pack(lang))
 
 
 @app.route("/create_user", methods=["GET", "POST"])

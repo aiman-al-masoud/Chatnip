@@ -208,6 +208,9 @@ def delete_avatar(username):
     os.remove(oldpath)
       
 
+def lang_pack(language):
+    return {row[0] : row[1] for i, row in  pd.read_csv(f"./static/lang_packs/{language}.csv", sep="|", header=None).iterrows()}
+
 
 
 # ----- methods that depend on the implementation --------
