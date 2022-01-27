@@ -134,4 +134,6 @@ dmypy.json
 .my_env/
 .vscode
 
-#ignore changes to data folder
+#ignore changes to some data folders
+static/avatars/
+res/
