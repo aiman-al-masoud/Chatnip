@@ -10,7 +10,7 @@
 <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/>
 </div>
 
-
+<img src="https://github.com/aiman-al-masoud/Chatnip/blob/main/static/icons/intro.gif"></img>
 
 <details>
   <summary><b><strong>Setting up a Local Testing Environment</strong></b></summary>
