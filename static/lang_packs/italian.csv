@@ -6,3 +6,41 @@ enjoy|Enjoy!
 login|Accedi
 signup|Registrati
 more_about_us|Più info
+username|Nome Utente
+password|Password
+dont_have_an_account_yet|Non hai ancora un profilo?
+homepage|Casa
+password_repeat|Riscrivi la password:
+keypass_choose|Scegli una parola chiave (diversa) per immagazzinare le chiavi crittografiche:
+keypass_why_need|(Ti servirà per decifrare i messaggi).
+please_fill_in_blanks|Riempi li spazi per dimostrare che sei un umano:
+already_have_an_account|Hai già un profilo?
+account_settings|Impostazioni di Profilo
+avatar_set|Imposta Avatar
+avatar_change|Cambia Avatar
+avatar_delete|Rimuovi Avatar
+password_old|Password Vecchia
+password_new|Password Nuova
+password_reset|Reimposta Password
+public_key_reset|Reimposta Chiave Pubblica
+password_account|Password di Profilo
+passphrase_new|Nuova parola chiave per generare nuovo paio di chiavi crittografiche:
+public_key_reset|Reimposta Chiave Pubblica
+account_delete|Elimina Profilo
+delete_my_account|Elimina il mio Profilo
+local_storage|Disco
+save_messages_as_text_file|Salva messaggi come file di testo
+delete_all_messages_from_local_storage|Cancella tutti i messaggi dal disco
+my_home|Casa
+your_chats|Le tue conversazioni:
+chat_open|Apri Conversazione.
+type_in_a_message|Scrivi un messaggio...
+send|Invia
+privacy|Riservatezza (Privacy)
+what_i_need_question|Cosa mi occorre per creare un profilo qui?
+what_i_need_answer|Soltanto un nome utente ASCII, una password per accedere e un'altra parola chiave per creare le chiavi crittografiche.
+what_cookies_question|Che tipo di cookie servono a queso sito?
+what_cookies_answer|Il tuo nome utente, l'id della sessione e la tua lingua di preferenza.
+license_terms_obtain|Puoi ottenere la versione integrale della licenza qua:
+source_code_at|Il codice sorgente è disponibile a:
+how_it_works|Come Funziona
