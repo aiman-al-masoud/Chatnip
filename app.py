@@ -298,6 +298,7 @@ def on_upload_avatar():
         return redirect("/login_page")
     
     f = request.files["avatar"]
+
     U.reset_avatar(username, f)
     
     return redirect("/settings")

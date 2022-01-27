@@ -187,7 +187,7 @@ def get_avatar_path(username):
         filename = [filename for filename in  os.listdir("./static/avatars") if username in filename][0]
         return f"/avatars/{filename}"
     except:
-        return ""
+        return "/avatars/default/default.png"
 
 
 def reset_avatar(username, file):
