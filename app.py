@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file, redirect
+from flask import Flask, render_template, request, send_file, redirect, url_for
 from flask_cors import CORS
 import json
 import utils as U
@@ -322,7 +322,10 @@ def on_delete_avatar():
     return "OK"
     
 
-
+@app.route("/get_avatar", methods=["POST", "GET"])
+def on_get_avatar():
+    username = request.json["username"]
+    return json.dumps(  {"avatar":url_for('static', filename=U.get_avatar_path(username), _external=True)} )
 
 
 

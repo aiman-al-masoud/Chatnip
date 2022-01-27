@@ -188,6 +188,15 @@ function switchToChat(chatname) {
         div_inbox.appendChild(ChatMsg(message))
     }
 
+
+    fetch("/get_avatar", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({"username": chatname})
+    }).then( (res)=> {return res.json()} ).then((data)=> { 
+        document.getElementById("image_other_guys_avatar").src=  data.avatar;
+    })
+
 }
 
 
