@@ -29,7 +29,7 @@ def on_index():
     try: lang = request.cookies["language"]
     except: lang = "english"
 
-    return render_template("index.html" , lang=U.lang_pack(lang) )
+    return render_template("index.html" , lang=U.lang_pack(lang), available_languages=U.available_lang_packs() )
 
 
 

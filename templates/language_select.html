@@ -1,7 +1,8 @@
 <select name="select_language" id="select_language">
     <!--Put a template-for here, for each lang pack file-->
-    <option value="english">english</option>
-    <option value="italian">italian</option>
+    {% for lang in available_languages %}
+       <option value="{{lang}}">{{lang}}</option>
+    {% endfor %}
 </select>
 
 
@@ -10,7 +11,7 @@
 <script>
     document.getElementById("select_language").addEventListener("change", function () {
         setCookie("language", document.getElementById("select_language").value)
-        document.location.href=""
+        document.location.href = ""
     })
     window.addEventListener("load", function () {
         document.getElementById("select_language").value = getCookie("language")

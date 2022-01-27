@@ -211,6 +211,9 @@ def delete_avatar(username):
 def lang_pack(language):
     return {row[0] : row[1] for i, row in  pd.read_csv(f"./static/lang_packs/{language}.csv", sep="|", header=None).iterrows()}
 
+def available_lang_packs():
+    return [l.split(".")[0] for l in os.listdir("./static/lang_packs")]
+
 
 
 # ----- methods that depend on the implementation --------
