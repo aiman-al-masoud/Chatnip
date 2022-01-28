@@ -251,7 +251,6 @@ def __message_table():
 
 
 
-# print(get_avatar_path("cammerlo"))
 
 
 
