@@ -180,6 +180,7 @@ def delete_user(username):
     m = m[(m.sendername!=username)&(m.destname!=username)]
     u.to_csv(__USERS_PATH, index=False)
     m.to_csv(__MESSAGE_PATH, index=False)
+    delete_avatar(username)
 
 
 def get_avatar_path(username):

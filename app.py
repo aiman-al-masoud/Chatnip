@@ -238,15 +238,18 @@ def on_delete_user():
     # get from cookies
     username = request.cookies["username"] 
     session_id = request.cookies["session_id"]
+    password = request.json["password"]
 
     if U.session_id_expired(username):
         return redirect("/login_page")
 
     if U.get_session_id(username)!=session_id:
         return redirect("/login_page")
+
+    if U.get_hashed_password(username)!=U.hash_password(password+U.get_salt(username)):
+        return "Wrong password!", 400 # bad request
     
     U.delete_user(username)
-
     return "OK" # success
 
 

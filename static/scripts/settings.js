@@ -29,8 +29,19 @@ document.getElementById("button_reset_public_key").addEventListener("click", fun
 
 
 document.getElementById("button_delete_account").addEventListener("click", function(){
-    fetch("/delete_user")
+    fetch("/delete_user",{
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({"password":document.getElementById("input_password_delete_account").value})
+    })    
+    //if request is bad, display the error message from the sever and break the chain.
+    .then((res)=> {if(!res.ok){res.text().then(((text)=> {alert(text); return null;}   )) }else{return res;}   })
+    .then((res)=>{
+        if(res){document.location.href = "/"}
+    })
 })
+
+
 
 
 document.getElementById("button_delete_local_storage_messages").addEventListener("click", function(){
