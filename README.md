@@ -12,6 +12,27 @@
 
 <img src="https://github.com/aiman-al-masoud/Chatnip/blob/main/static/icons/intro.gif" title="dumb demo"></img>
 
+<details>
+ <summary><strong>Description</strong></summary>
+  
+  This is a fully functioning client-server-achitecture IM-service, complete with RSA encryption.
+  
+  The project is free software, licensed under GPLv3.
+  
+It is meant as a project, for didactical reasons and for leisure. I strongly DISENCOURAGE you to use it for really important business! (Unless you've thoroughly read, and trust the code to work for your use-case). In any case, I have NO LIABILITIES for any potential misuse of this software.
+ 
+ ## Some of examples of what you can do with it:
+ 
+ * Deploy it on an online hosting service
+ * Fork it and improve it
+ * Or even create a mobile app client for it (which I'm also (maybe) planning to do some day).
+ * etc... 
+ 
+  The API documentation is fully available in the 'APIs Documentation' section of this README.
+  
+  Thank you for having read this!
+  
+ </details>
 
 
 <details>
