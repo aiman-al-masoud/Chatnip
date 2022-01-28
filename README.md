@@ -15,11 +15,17 @@
 <details>
  <summary><strong>Description</strong></summary>
   
-  This is a fully functioning client-server-achitecture IM-service, complete with RSA encryption.
+ # Chatnip
+ 
+This is a fully functioning client-server-achitecture IM-service, complete with RSA encryption.
   
-  The project is free software, licensed under GPLv3.
+The project is free software, licensed under GPLv3.
   
-It is meant as a project, for didactical reasons and for leisure. I strongly DISENCOURAGE you to use it for really important business! (Unless you've thoroughly read, and trust the code to work for your use-case). In any case, I have NO LIABILITIES for any potential misuse of this software.
+It is meant as a project, for didactical reasons and for leisure. I strongly DISENCOURAGE you to use it for really important business! (Unless you've thoroughly read, and trust the code to work for your use-case). 
+ 
+ 
+In any case, I have NO LIABILITIES for any potential misuse of this software.
+ 
  
  ## Some examples of what you can do with it:
  
