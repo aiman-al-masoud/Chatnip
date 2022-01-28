@@ -21,7 +21,7 @@
   
 It is meant as a project, for didactical reasons and for leisure. I strongly DISENCOURAGE you to use it for really important business! (Unless you've thoroughly read, and trust the code to work for your use-case). In any case, I have NO LIABILITIES for any potential misuse of this software.
  
- ## Some of examples of what you can do with it:
+ ## Some examples of what you can do with it:
  
  * Deploy it on an online hosting service
  * Fork it and improve it
@@ -30,7 +30,7 @@ It is meant as a project, for didactical reasons and for leisure. I strongly DIS
  
   The API documentation is fully available in the 'APIs Documentation' section of this README.
   
-  Thank you for having read this!
+  ## Thank you for having read this!
   
  </details>
 
