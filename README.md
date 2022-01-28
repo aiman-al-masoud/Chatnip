@@ -152,7 +152,7 @@ public_key:"PUBLIC_KEY_OF_ANYUSERNAME"
 
 If successful, deletes an account from the server, along with all of its associated messages (sent and received*), and avatar.
 
-**Albeit the received ones already shouldn't be on the server anymore, beacause if the user is logged in and active, they get downloaded and deleted from the server automatically.
+*Albeit the received ones already shouldn't be on the server anymore, beacause if the user is logged in and active, they get downloaded and deleted from the server automatically.
 
 
 ## Useragent's request:
