@@ -30,7 +30,7 @@ It is meant as a project, for didactical reasons and for leisure. I strongly DIS
  
   The API documentation is fully available in the 'APIs Documentation' section of this README.
   
-   * Thank you for having read this! *
+   **Thank you for having read this!**
   
  </details>
 
