@@ -7,6 +7,8 @@ document.getElementById("button_reset_password").addEventListener("click", funct
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({"old_password":old_password, "new_password":new_password})
     })
+    //if request is bad, display the error message from the sever and break the chain.
+    .then((res)=> {if(!res.ok){res.text().then(((text)=> {alert(text); return null;}   )) }else{return res;}   })
 
 })
 
@@ -24,7 +26,11 @@ document.getElementById("button_reset_public_key").addEventListener("click", fun
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({"password":password, "new_public_key":  publicKey })
     })
+
+    //if request is bad, display the error message from the sever and break the chain.
+    .then((res)=> {if(!res.ok){res.text().then(((text)=> {alert(text); return null;}   )) }else{return res;}   })
     
+
 })
 
 
