@@ -105,8 +105,10 @@ session_id
 ## Server's OK response:
 
   ```
-List of json objects, each object is a message. The server deletes the messages from the database right before sending the json list.
+List of json objects, each object is a message. 
   ```
+
+The server also deletes the messages from the database right before sending the json list.
 
 ### A message that a user receives from the server looks like this:
 
