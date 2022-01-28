@@ -17,26 +17,26 @@
   
  # Chatnip
  
-This is a fully functioning client-server-achitecture IM-service, complete with <a href="https://github.com/aiman-al-masoud/Chatnip/tree/main/static/scripts/cryptico">RSA encryption</a>.
+This is a fully functioning, client-server-achitecture IM-service, complete with <a href="https://github.com/aiman-al-masoud/Chatnip/tree/main/static/scripts/cryptico">RSA encryption</a>.
  
   
-The project is free software, licensed under GPLv3.
+The project is free software, licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU GPLv3</a> .
+ 
   
-It is meant as a project, for didactical reasons and for leisure. I strongly DISENCOURAGE you to use it for really important business! (Unless you've thoroughly read, and trust the code to work for your use-case). 
+It is meant as a project, for didactical purposes and for leisure. I strongly DISENCOURAGE you to use it for really important business! (Unless you've thoroughly read, and trust the code to work for your use-case). 
  
  
 In any case, I have NO LIABILITIES for any potential misuse of this software.
  
  
- ## Some examples of what you can do with it:
+ ## Some examples of crazy stuff you can do with it:
  
  * Deploy it on an online hosting service
  * Fork it and improve it
  * Or even create a mobile app client for it (which I'm also (maybe) planning to do some day).
- * etc... 
+ * etc... etc... 
  
-
-  The API documentation is fully available in the  <a href="#apis_documentation">'APIs Documentation'</a> section of this README.
+The API documentation is fully available in the  <a href="#apis_documentation">'APIs Documentation'</a> section of this README.
   
    **Thank you for having read this!**
   
