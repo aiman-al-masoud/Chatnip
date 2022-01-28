@@ -28,7 +28,7 @@
 username:"username",
 password:"password",
 public_key:"PUBLIC_KEY",  
-dict_fill_in_the_blanks:{"sentence":"missing_word"}
+dict_fill_in_the_blanks:{question:"Fyyyill in de ____ hooman.", answer:"blanks"}
 }
   ```
 
