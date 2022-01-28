@@ -61,7 +61,7 @@ session_id:"session_id"
 }
 ```
   
-session_id: it's a N-char alphanumeric string that expires in M minutes. It gets sent back to the server as a cookie. It serves to prove a user is authorized to send and receive messages without them having to re-enter their password every time. 
+* session_id: it's a N-char alphanumeric string that expires in M minutes. It gets sent back to the server as a cookie. It serves to prove a user is authorized to send and receive messages without them having to re-enter their password every time. 
 
 (On Fri Jan 28 2022 it's: N=32 and M=5)
 
@@ -82,11 +82,11 @@ session_id : "session_id"
 }
   ```
 
-username: name of the sender.
-destname: name of the recipient.
-message_text: text of the message
-timestamp: UNIX epoch in seconds (ie: seconds elapsed since 00:00 1st Jan 1970). It represents the time at which the message got sent (NOT the time at which the sever received) the message.
-session_id: session id (see up).
+* username: name of the sender.
+* destname: name of the recipient.
+* message_text: text of the message
+* timestamp: UNIX epoch in seconds (ie: seconds elapsed since 00:00 1st Jan 1970). It represents the time at which the message got sent (NOT the time at which the sever received) the message.
+* session_id: session id (see up).
 
 
 
@@ -121,7 +121,7 @@ The server also deletes the messages from the database right before sending the 
 }
   ```
 
-message_text: a message encrypted with the recipient's public key. The recipient has to have the corresponding private key stored on their localStorage to decrypt it. The message also contains a signature to verify the identity of the sender.
+* message_text: a message encrypted with the recipient's public key. The recipient has to have the corresponding private key stored on their localStorage to decrypt it. The message also contains a signature to verify the identity of the sender.
 
 
 
@@ -152,7 +152,7 @@ public_key:"PUBLIC_KEY_OF_ANYUSERNAME"
 
 If successful, deletes an account from the server, along with all of its associated messages (sent and received*), and avatar.
 
-* albeit the received ones already shouldn't be on the server anymore, beacause if the user is logged in and active, they get downloaded and deleted from the server automatically.
+**Albeit the received ones already shouldn't be on the server anymore, beacause if the user is logged in and active, they get downloaded and deleted from the server automatically.
 
 
 ## Useragent's request:
