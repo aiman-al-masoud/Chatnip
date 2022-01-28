@@ -9,7 +9,7 @@ more_about_us|Più info
 username|Nome Utente
 password|Password
 dont_have_an_account_yet|Non hai ancora un profilo?
-homepage|Casa
+homepage|Homepage
 password_repeat|Riscrivi la password:
 keypass_choose|Scegli una parola chiave (diversa) per immagazzinare le chiavi crittografiche:
 keypass_why_need|(Ti servirà per decifrare i messaggi).
@@ -44,3 +44,4 @@ what_cookies_answer|Il tuo nome utente, l'id della sessione e la tua lingua di p
 license_terms_obtain|Puoi ottenere la versione integrale della licenza qua:
 source_code_at|Il codice sorgente è disponibile a:
 how_it_works|Come Funziona
+choose_your_language|Scegli la tua lingua:

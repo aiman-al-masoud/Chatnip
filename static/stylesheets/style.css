@@ -198,3 +198,10 @@ footer{
     border-radius: 100px;
     height: 40px;
 }
+
+
+select{
+    width: 50%;
+    font-size: large;
+    border-radius: 60px;
+}
