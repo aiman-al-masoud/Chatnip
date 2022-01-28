@@ -12,6 +12,273 @@
 
 <img src="https://github.com/aiman-al-masoud/Chatnip/blob/main/static/icons/intro.gif" title="dumb demo"></img>
 
+
+
+<details>
+  <summary><strong>APIs Documentation</strong></summary>
+  
+  # /create_user
+  
+  If successful, creates a new account on the server.
+
+  ## User agent's request:
+
+  ```
+{
+username:"username",
+password:"password",
+public_key:"PUBLIC_KEY",  
+dict_fill_in_the_blanks:{"sentence":"missing_word"}
+}
+  ```
+
+* username: a new username that doesn't already exist on the server.
+* password: a password.
+* public_key: the RSA public-key that will be used to encrypt messages for the new user.
+* dict_fill_in_the_blanks: a security measure against bots. (Users have to complete a simple sentence that is incorrectly spelled to prove they're human beings).
+
+
+
+# /authenticate
+
+If authentication succeeds, the user will be sent a new session id.
+
+## Useragent's request:
+
+ ```
+{
+username:"username",
+password:"password_attempt"
+}
+  ```
+
+
+## Server's OK response:
+
+  ```
+{
+session_id:"session_id"
+}
+```
+  
+session_id: it's a N-char alphanumeric string that expires in M minutes. It gets sent back to the server as a cookie. It serves to prove a user is authorized to send and receive messages without them having to re-enter their password every time. 
+
+(On Fri Jan 28 2022 it's: N=32 and M=5)
+
+
+# /upload_message
+
+If successful, uploads a message to the server.
+
+## Useragent's request:
+
+  ```
+{
+username:"sendersname",
+destname : "recipientsname",
+message_text : "text of the message",
+timestamp : 1643365746,
+session_id : "session_id"
+}
+  ```
+
+username: name of the sender.
+destname: name of the recipient.
+message_text: text of the message
+timestamp: UNIX epoch in seconds (ie: seconds elapsed since 00:00 1st Jan 1970). It represents the time at which the message got sent (NOT the time at which the sever received) the message.
+session_id: session id (see up).
+
+
+
+# /download_messages
+
+
+## User agent's request:
+
+  ```
+username  
+session_id 
+
+(as cookies)
+```
+  
+## Server's OK response:
+
+  ```
+List of json objects, each object is a message. The server deletes the messages from the database right before sending the json list.
+  ```
+
+### A message that a user receives from the server looks like this:
+
+
+  ```
+{ 
+"sendername":"nameofthesender", 
+"message_text": "kwjeojqijmmj(MASNDU2JHJSKDSI2874jjjansJMN0TevenTRyINGakisndh", 
+"timestamp":1643365746
+}
+  ```
+
+message_text: a message encrypted with the recipient's public key. The recipient has to have the corresponding private key stored on their localStorage to decrypt it. The message also contains a signature to verify the identity of the sender.
+
+
+
+# /get_public_key
+
+If successful returns the public key associated to any requested username.
+
+## Useragent's request:
+
+  ```
+{
+username:"anyusername"
+}
+  ```
+
+## Server's OK response:
+
+  ```
+{
+public_key:"PUBLIC_KEY_OF_ANYUSERNAME"
+}
+```
+  
+
+
+
+# /delete_user
+
+If successful, deletes an account from the server, along with all of its associated messages (sent and received*), and avatar.
+
+* albeit the received ones already shouldn't be on the server anymore, beacause if the user is logged in and active, they get downloaded and deleted from the server automatically.
+
+
+## Useragent's request:
+
+    
+``` 
+{
+password:"password"
+}
+  
+username
+session_id
+(as cookies)
+  ```
+
+
+# /reset_password
+
+If successful, the password of a user is reset.
+
+
+## Useragent's request:
+
+```
+{
+old_password:"old_password",
+new_password:"new_password"
+}
+ 
+  
+  username
+session_id
+  
+(as cookies)
+  
+  ```
+
+
+# /reset_public_key
+
+If successful, the public key of a user is reset.
+
+## Useragent's request:
+
+```
+{
+password:"password",
+new_public_key:"NEW_PUBLIC_KEY"
+}
+
+  
+username
+session_id
+
+(as cookies)
+  
+  ```
+
+
+
+
+# /upload_avatar
+
+
+If successful, the avatar (profile-picture/thumbnail-image) of the user is updated.
+
+```
+username
+session_id
+
+(as cookies)
+    
+avatar
+
+(an image file)
+
+  ```
+
+
+NB: on the current implemenation of the client, this is the only endpoint that uses an html-form to send the data to the server, rather than just posting a JSON request.
+
+
+
+# /delete_avatar
+
+
+If successful, deletes the custom avatar (profile-picture/thumbnail-image) of the user from the server.
+
+## Useragent's request:
+
+  ```
+username
+session_id
+
+(as cookies)
+```
+
+
+
+# /get_avatar
+
+If successful, returns a link to the avatar (profile-picture/thumbnail-image) of any user.
+
+
+## Useragent's request:
+
+  ```
+{
+username:"anyusername"
+}
+  ```
+
+Server's OK response:
+
+  ```
+{
+avatar:"https://url/to/avatar.png"
+}
+```
+  
+  
+</details>
+
+
+
+
+
+
 <details>
   <summary><b><strong>Setting up a Local Testing Environment</strong></b></summary>
 
