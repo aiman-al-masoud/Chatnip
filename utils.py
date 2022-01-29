@@ -168,12 +168,13 @@ def generate_salt():
 def random_fill_in_the_blanks_question():
     """
     """
-    return pd.read_csv("./res/fill_in_the_blanks.csv",sep="|").sample(n=1)["question"].to_list()[0]
+    
+    return pd.read_csv(f"{ROOT_PATH}/res/fill_in_the_blanks.csv",sep="|").sample(n=1)["question"].to_list()[0]
 
 def get_fill_in_the_blanks_answer(question):
     """
     """
-    df = pd.read_csv("./res/fill_in_the_blanks.csv",sep="|")
+    df = pd.read_csv(f"{ROOT_PATH}/res/fill_in_the_blanks.csv",sep="|")
     return df[df["question"]==question]["answer"].to_list()[0] 
 
 
