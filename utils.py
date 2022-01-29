@@ -13,10 +13,18 @@ import secrets
 import database 
 
 
-# sql db is still a work in progress...
-# DB = database.SqlDatabase('mysql+pymysql://root:@127.0.0.1/cats')
 
-DB = database.CsvDatabase("./dynamic/tables")
+ROOT_PATH = None
+DB = None
+
+def set_root_path(root_path):
+    global ROOT_PATH, DB
+    ROOT_PATH  = root_path
+    # sql db is still a work in progress...
+    # DB = database.SqlDatabase('mysql+pymysql://root:@127.0.0.1/cats')
+    DB = database.CsvDatabase(f"{ROOT_PATH}/dynamic/tables")
+
+
 
 def create_user(username, hashed_password, salt, public_key):
 
@@ -35,6 +43,7 @@ def user_exists(username):
     """
     Returns true if username is already taken.
     """
+
     try:
         return (DB.get_users_table().username == username).sum() == 1
     except:
@@ -191,7 +200,7 @@ def delete_user(username):
 
 def get_avatar_path(username):
     try:
-        filename = [filename for filename in  os.listdir("./static/avatars") if username in filename][0]
+        filename = [filename for filename in  os.listdir(f"{ROOT_PATH}/static/avatars") if username in filename][0]
         return f"/avatars/{filename}"
     except:
         return "/avatars/default/default.png"
@@ -201,20 +210,20 @@ def reset_avatar(username, file):
     
     delete_avatar(username)
     _, extension = os.path.splitext(file.filename)
-    file.save(f"./static/avatars/{username}{extension}")
+    file.save(f"{ROOT_PATH}/static/avatars/{username}{extension}")
 
 
 def delete_avatar(username):
 
-    oldpath = f"./static{get_avatar_path(username)}"
-    if oldpath == "./static/avatars/default/default.png":
+    oldpath = f"{ROOT_PATH}/static{get_avatar_path(username)}"
+    if oldpath == f"{ROOT_PATH}/static/avatars/default/default.png":
         return
     os.remove(oldpath)
       
 
 def lang_pack(language):
-    return {row[0] : row[1] for i, row in  pd.read_csv(f"./static/lang_packs/{language}.csv", sep="|", header=None).iterrows()}
+    return {row[0] : row[1] for i, row in  pd.read_csv(f"{ROOT_PATH}/static/lang_packs/{language}.csv", sep="|", header=None).iterrows()}
 
 def available_lang_packs():
-    return [l.split(".")[0] for l in os.listdir("./static/lang_packs")]
+    return [l.split(".")[0] for l in os.listdir(f"{ROOT_PATH}/static/lang_packs")]
 

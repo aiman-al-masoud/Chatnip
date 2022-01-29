@@ -12,9 +12,10 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 logging.basicConfig( level=logging.DEBUG, format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 CORS(app)
+U.set_root_path(app.root_path)
 
 
-UPLOAD_FOLDER = "."
+UPLOAD_FOLDER = app.root_path
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 ALLOWED_EXTENSIONS = ['png', 'jpg', 'jpeg', 'gif']
 
