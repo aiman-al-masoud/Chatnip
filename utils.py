@@ -11,8 +11,12 @@ import secrets
 
 
 import database 
-DB = database.CsvDatabase("./dynamic/tables")
 
+
+# sql db is still a work in progress...
+# DB = database.SqlDatabase('mysql+pymysql://root:@127.0.0.1/cats')
+
+DB = database.CsvDatabase("./dynamic/tables")
 
 def create_user(username, hashed_password, salt, public_key):
 
