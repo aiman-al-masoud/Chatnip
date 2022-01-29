@@ -17,7 +17,9 @@
   
  # Chatnip
  
- <img src="https://github.com/aiman-al-masoud/Chatnip/blob/main/static/icons/chatnip_logo.png" width="400"></img>
+<center>
+  <img src="https://github.com/aiman-al-masoud/Chatnip/blob/main/static/icons/chatnip_logo.png" width="400"></img>
+ </center>
  
 This is a fully functioning, client-server-achitecture IM-service, complete with <a href="https://github.com/aiman-al-masoud/Chatnip/tree/main/static/scripts/cryptico">RSA encryption</a>.
  
