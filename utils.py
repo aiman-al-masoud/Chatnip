@@ -14,8 +14,6 @@ import database
 DB = database.CsvDatabase("./dynamic/tables")
 
 
-
-
 def create_user(username, hashed_password, salt, public_key):
 
     """
@@ -25,7 +23,6 @@ def create_user(username, hashed_password, salt, public_key):
     new_row = pd.DataFrame( [(username, hashed_password, salt, public_key, "", "")], columns= database.Database.USER_COLUMNS )
     t = DB.get_users_table()
     t = t.append(new_row)
-    # t.to_csv( __USERS_PATH , index=False) #TODO
     DB.save_table(t)
 
 
@@ -71,7 +68,6 @@ def append_to_inbox(username, message):
     new_row = pd.DataFrame( [(message["sender"], username, message["message_text"], message["timestamp"])], columns= database.Database.MESSAGE_COLUMNS )
     t = DB.get_messages_table()
     t = t.append(new_row)
-    # t.to_csv(__MESSAGE_PATH, index=False) #TODO
     DB.save_table(t)
 
 
@@ -95,7 +91,6 @@ def del_inbox(username):
     """
     t = DB.get_messages_table()
     t = t[(t.destname!=username)]
-    # t.to_csv(__MESSAGE_PATH, index=False) #TODO
     DB.save_table(t)
 
 
@@ -124,7 +119,6 @@ def set_session_id(username, session_id):
     t = DB.get_users_table()
     t.loc[ (t.username==username)  , "session_id"] = session_id
     t.loc[ (t.username==username)  , "expiration_session_id"] = int(time())+SESSION_LENGTH
-    # t.to_csv(__USERS_PATH, index=False) #TODO
     DB.save_table(t)
 
 
@@ -144,7 +138,6 @@ def get_public_key(username):
     """
     t = DB.get_users_table()
     return t.loc[ (t.username==username)  , "public_key"].to_list()[0]
-
 
 
 def get_salt(username):
@@ -171,18 +164,15 @@ def get_fill_in_the_blanks_answer(question):
     return df[df["question"]==question]["answer"].to_list()[0] 
 
 
-
 def reset_password(username, hashed_password, salt):
     t = DB.get_users_table()
     t.loc[ (t.username==username)  , "hashed_password"] = hashed_password
     t.loc[ (t.username==username)  , "salt"] = salt
-    # t.to_csv(__USERS_PATH, index=False) #TODO
     DB.save_table(t)
 
 def reset_public_key(username, public_key):
     t = DB.get_users_table()
     t.loc[ (t.username==username)  , "public_key"] = public_key
-    # t.to_csv(__USERS_PATH, index=False) #TODO
     DB.save_table(t)
 
 def delete_user(username):
@@ -190,8 +180,6 @@ def delete_user(username):
     u = u[u.username!=username]
     m = DB.get_messages_table()
     m = m[(m.sendername!=username)&(m.destname!=username)]
-    # u.to_csv(__USERS_PATH, index=False) #TODO
-    # m.to_csv(__MESSAGE_PATH, index=False) #TODO
     DB.save_table(u)
     DB.save_table(m)
     delete_avatar(username)
@@ -225,51 +213,4 @@ def lang_pack(language):
 
 def available_lang_packs():
     return [l.split(".")[0] for l in os.listdir("./static/lang_packs")]
-
-
-
-# ----- methods that depend on the implementation --------
-
-
-
-# __USERS_PATH = __ROOT_PATH+"/users.csv"
-# __MESSAGE_PATH = __ROOT_PATH+"/messages.csv"
-
-# __USER_COLUMNS =  ("username", "hashed_password", "salt", "public_key", "session_id", "expiration_session_id")
-
-# __MESSAGE_COLUMNS = ("sendername", "destname", "message_text", "timestamp")
-
-
-# def __users_table():
-#     path =__USERS_PATH
-#     df = pd.DataFrame( [], columns=__USER_COLUMNS )
-
-#     if not os.path.isfile(path):
-#         with open(path, "w+") as f:
-#             pass
-#         df.to_csv(path, index=False) #TODO
-    
-#     return pd.read_csv(path)
-
-# def __message_table():
-#     path = __MESSAGE_PATH
-#     df = pd.DataFrame( [], columns=__MESSAGE_COLUMNS )
-
-#     if not os.path.isfile(path):
-#         with open(path, "w+") as f:
-#             pass
-#         df.to_csv(path, index=False) #TODO
-    
-#     return pd.read_csv(path)
-
-
-
-
-#print(tuple(__users_table().columns))
-
-
-
-
-
-
 
