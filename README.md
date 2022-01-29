@@ -23,7 +23,7 @@ This is a fully functioning, client-server-achitecture IM-service, complete with
 The project is free software, licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU GPLv3</a> .
  
   
-It is meant as a project, for didactical purposes and for leisure. I strongly DISENCOURAGE you to use it for really important business! (Unless you've thoroughly read, and trust the code to work for your use-case). 
+It is meant as a project, for didactical purposes and for leisure. I strongly DISCOURAGE its use for seriously important business! (Unless you've thoroughly read, and trust the code to work for your use-case). 
  
  
 In any case, I have NO LIABILITIES for any potential misuse of this software.
