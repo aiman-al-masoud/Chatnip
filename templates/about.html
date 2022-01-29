@@ -6,11 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='/stylesheets/style.css')}}">
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='icons/favicon.ico')}}">
     <title>About</title>
 </head>
 
 <body>
 
+    <div class="center" >
+        <h1>Chatnip</h1>
+        <img src="{{url_for('static', filename='icons/chatnip_logo.png')}}" width="300" alt="">
+    </div>
 
     <h1>{{lang['privacy']}}</h1>
 
@@ -42,7 +47,7 @@
 
 
     <h1>{{lang['how_it_works']}}</h1>
-    <p>Lorem ipsum dolor...</p>
+    <p><a href="https://github.com/aiman-al-masoud/Chatnip#readme">README</a></p>
 
     <br>
 
