@@ -137,7 +137,4 @@ dmypy.json
 #ignore changes to some data folders
 static/avatars/
 res/
-# dynamic/
-# dynamic/tables/
-# dynamic/tables/messages.csv
-# dynamic/tables/users.csv
+dynamic/
