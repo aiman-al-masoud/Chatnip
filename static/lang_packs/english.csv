@@ -27,7 +27,6 @@ password_reset|Reset Password
 public_key_reset|Reset Public Key
 password_account|Account Password
 passphrase_new|New passphrase to generate your new key-pair:
-public_key_reset|reset public key
 account_delete|Delete Account
 delete_my_account|Delete My Account
 local_storage|Local Storage
@@ -47,6 +46,6 @@ license_terms_obtain|You can obtain the full terms of the license here:
 source_code_at|The source-code is available at:
 how_it_works|How it works
 choose_your_language|Choose your language:
-
-
+settings|Settings
+logout|Log-out
 

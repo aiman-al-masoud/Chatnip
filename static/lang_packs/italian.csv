@@ -27,7 +27,6 @@ password_reset|Reimposta Password
 public_key_reset|Reimposta Chiave Pubblica
 password_account|Password di Profilo
 passphrase_new|Nuova parola chiave per generare nuovo paio di chiavi crittografiche:
-public_key_reset|Reimposta Chiave Pubblica
 account_delete|Elimina Profilo
 delete_my_account|Elimina il mio Profilo
 local_storage|Disco
@@ -47,3 +46,5 @@ license_terms_obtain|Puoi ottenere la versione integrale della licenza qua:
 source_code_at|Il codice sorgente è disponibile a:
 how_it_works|Come Funziona
 choose_your_language|Scegli la tua lingua:
+settings|Impostazioni
+logout|Esci
