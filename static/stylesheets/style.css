@@ -209,3 +209,8 @@ select{
     font-size: large;
     border-radius: 60px;
 }
+
+
+a{
+    color: red;
+}
