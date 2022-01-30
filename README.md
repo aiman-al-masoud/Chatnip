@@ -24,7 +24,10 @@
  
 
 This is a fully functioning, client-server-achitecture IM-service, complete with <a href="https://github.com/aiman-al-masoud/Chatnip/tree/main/static/scripts/cryptico">RSA encryption</a>.
- 
+
+**You can try it out here:**
+<a href="https://chatnip.pythonanywhere.com">https://chatnip.pythonanywhere.com</a> 
+  
   
 The project is free software, licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU GPLv3</a> .
  
