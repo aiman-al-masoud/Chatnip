@@ -49,15 +49,15 @@ document.getElementById("button_check_keypass").addEventListener("click", functi
 
             setCookie("username", username) 
             localStorage.setItem("keypass", sha256.hex(keypass_attempt)) 
-            document.getElementById("check_results").style = "display: block; visibility : visible;"  //TODO
-
 
             if (ok) {
-                document.getElementById("check_results").innerHTML = "CORRECT :-)"
-                document.getElementById("check_results").style = "color : green;"
+                document.getElementById("keypass_ok").style = "display: block; visibility : visible; color: green;"  
+                document.getElementById("keypass_wrong").style = "display: none; visibility : hidden;"  
+
             } else {
-                document.getElementById("check_results").innerHTML = "WRONG! :-("
-                document.getElementById("check_results").style = "color : red;"
+                document.getElementById("keypass_wrong").style = "display: block; visibility : visible; color:red;" 
+                document.getElementById("keypass_ok").style = "display: none; visibility : hidden;"  
+ 
             }
 
         })

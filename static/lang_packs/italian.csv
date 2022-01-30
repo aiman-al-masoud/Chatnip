@@ -53,3 +53,5 @@ input_it_here|Inseriscila qui:
 you_can_click_on_check_keypass|Puoi cliccare su 'Verifica' per controllare se corrisponde alla tua chiave pubblica presente sui nostri server. 
 check|Verifica
 if_you_forgot_passphrase_can_login_anyway|Se hai dimenticato la parola chiave, puoi accedere comunque. Ma dovrai resettarla dalle impostazioni, e PERDERAI qualsiasi messaggio attualmente in arrivo.
+keypass_ok|CORRETTA :-) 
+keypass_wrong|ERRATA! :-( 

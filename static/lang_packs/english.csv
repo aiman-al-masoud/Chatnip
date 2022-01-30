@@ -53,6 +53,7 @@ input_it_here|Input it here:
 you_can_click_on_check_keypass|You can click on 'Check', to see if it matches with your public-key stored on our servers.
 check|Check
 if_you_forgot_passphrase_can_login_anyway|If you forgot your passphrase, you can log-in anyway. But you'll have to reset it from settings, and you'll LOSE any message currently in your inbox.
-
+keypass_ok|CORRECT :-) 
+keypass_wrong|WRONG! :-( 
 
 
