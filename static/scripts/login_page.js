@@ -3,6 +3,7 @@
  */
 window.addEventListener("load", function (elem, event) {
     document.getElementById("input_username").value = getCookie("username")
+    window.keypassWrongAttemptsCounter = 0;
 })
 
 /**
@@ -21,17 +22,18 @@ document.getElementById("button_login").addEventListener("click", function (elem
 
     isOldKeypassOk()
 
-        .then((ok) => {
+    .then((ok) => {
 
-            console.log(ok)
+        console.log(ok)
 
-            if (ok) {
-                authenticate(username, password)
-            } else {
-                document.getElementById("div_wrong_keypass").style = "display: block; visibility : visible;"
-            }
+        if (ok || window.keypassWrongAttemptsCounter>=1) {
+            authenticate(username, password)
+        } else {
+            document.getElementById("div_wrong_keypass").style = "display: block; visibility : visible;"
+            window.keypassWrongAttemptsCounter++;
+        }
 
-        })
+    })
 
 });
 
@@ -65,6 +67,10 @@ document.getElementById("button_check_keypass").addEventListener("click", functi
 })
 
 
+/**
+ * Checks if the keypass entered by the user in the specific text-field is ok.
+ * @returns 
+ */
 function isKeypassOk() {
 
     let keypass_attempt = document.getElementById("input_keypass").value
@@ -84,7 +90,10 @@ function isKeypassOk() {
 }
 
 
-
+/**
+ * Checks if the keypass currently stored on localStorage is ok.
+ * @returns  
+ */
 function isOldKeypassOk() {
 
     let username = document.getElementById("input_username").value
