@@ -19,7 +19,10 @@
 
     <form id="form_upload_avatar" name="form_upload_avatar" action="/upload_avatar" method="post" enctype="multipart/form-data">
         <input type="file" name="avatar" id="avatar" class="awesome_button" required>
-        <input type="submit" value="{{lang['avatar_change']}}" class="awesome_button">
+        <input hidden style="display: none;" id="submit_avatar" type="submit" value="{{lang['avatar_change']}}" class="awesome_button">
+        
+        <br>
+        <br>
         <input id="button_delete_avatar" type="button" value="{{lang['avatar_delete']}}" class="dangerous_button">
     </form>
 

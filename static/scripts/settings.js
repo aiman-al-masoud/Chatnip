@@ -62,3 +62,11 @@ document.getElementById("button_save_messages").addEventListener("click", functi
 document.getElementById("button_delete_avatar").addEventListener("click", function(){
     fetch("/delete_avatar").then(function(){window.location.href="/settings"})
 })
+
+
+document.getElementById("avatar").addEventListener("change", function(){
+
+
+    document.getElementById("submit_avatar").style = "display: inline; visibility:visible;"
+    
+})
