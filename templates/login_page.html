@@ -31,23 +31,23 @@
 
 
     <div id="div_wrong_keypass" hidden style="display: none;" >
-        <h3>Passphrase for crypto key-pair not found and/or incorrect!</h3>
+        <h3>{{lang['keypass_incorrect']}}</h3>
         
-        <h4>Input it here:</h4>
+        <h4>{{lang['input_it_here']}}</h4>
 
-        <em>You can click on 'Check', to see if it matches with your public-key stored on our servers.</em>
+        <em>{{lang['you_can_click_on_check_keypass']}}</em>
         
         <br>
         <br>
 
         <input id="input_keypass" type="password" class="text_input_box"/>
-        <input id="button_check_keypass" type="button" value="Check" class="awesome_button"/>
+        <input id="button_check_keypass" type="button" value="{{lang['check']}}" class="awesome_button"/>
         
         <p id="check_results"></p>
 
         <br>
         <br>
-        <em>If you forgot your passphrase, you can log-in anyway. But you'll have to reset it from settings, and you'll LOSE any message currently in your inbox.</em>
+        <em>{{lang['if_you_forgot_passphrase_can_login_anyway']}}</em>
 
         <br>
         <br>

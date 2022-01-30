@@ -48,3 +48,8 @@ how_it_works|Come Funziona
 choose_your_language|Scegli la tua lingua:
 settings|Impostazioni
 logout|Esci
+keypass_incorrect|Parola chiave per chiavi crittografiche assente e/o errata!
+input_it_here|Inseriscila qui:
+you_can_click_on_check_keypass|Puoi cliccare su 'Verifica' per controllare se corrisponde con la tua chiave pubblica presente sui nostri server. 
+check|Verifica
+if_you_forgot_passphrase_can_login_anyway|Se hai dimenticato la parola chiave, puoi accedere comunque. Ma dovrai resettarla dalle impostazioni, e PERDERAI qualsiasi messaggio attualmente in arrivo.
