@@ -56,16 +56,25 @@ function checkForMessages() {
 
     downloadMessages()
         .then((newMessages) => {
-            window.messages = window.messages.concat(newMessages);
-            for(let newMessage of newMessages){
-                document.getElementById("div_inbox").appendChild(ChatMsg(newMessage))
-            }
-            displayChatNames(newMessages)
 
-            //TODO: make this more efficient
-            localStorage.setItem("messages", JSON.stringify(window.messages))
+            if(newMessages.length!=0){
+
+                window.messages = window.messages.concat(newMessages);
+                for(let newMessage of newMessages){
+                    document.getElementById("div_inbox").appendChild(ChatMsg(newMessage))
+                }
+                displayChatNames(newMessages)
+    
+                //TODO: make this more efficient MAKE THIS MORE EFFICIENTTTTTTT 
+                localStorage.setItem("messages", JSON.stringify(window.messages))
+    
+                scrollToBottom("div_inbox")
+
+            }
+
         })
 
+    
     const millisecs = 2000
     setTimeout(checkForMessages, millisecs);
 }
@@ -198,6 +207,16 @@ function switchToChat(chatname) {
     })
 
 }
+
+
+/**
+ * Scroll to the bottom of a div.
+ * @param {*} id 
+ */
+function scrollToBottom (id) {
+    var div = document.getElementById(id);
+    div.scrollTop = div.scrollHeight - div.clientHeight;
+ }
 
 
 
