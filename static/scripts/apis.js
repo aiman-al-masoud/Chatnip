@@ -146,6 +146,10 @@ function uploadMessage(destname, message_text) {
 function downloadMessages() {
     return fetch("/download_messages")
 
+
+      //if request is bad throw user back to the login page.
+      .then((res)=> {if(!res.ok){ window.location.href="/login_page"; return null;}else{return res;}   })
+    
     .then((res) => { return res.json(); })
 
     .then((data) => {

@@ -206,10 +206,12 @@ def on_download_messages():
     session_id = request.cookies["session_id"]
 
     if U.session_id_expired(username):
-        return redirect("/login_page")
+        #return redirect("/login_page")
+        return "session expired", 400
 
     if U.get_session_id(username)!=session_id:
-        return redirect("/login_page")
+        #return redirect("/login_page")
+        return "session expired", 400
 
     inbox = U.get_inbox(username)
     U.del_inbox(username)
