@@ -32,6 +32,12 @@ document.getElementById("button_send_message").addEventListener("click", functio
         messages.push(newMessage)
         document.getElementById("div_inbox").appendChild(ChatMsg(newMessage))
         displayChatNames([newMessage])
+        scrollToBottom("div_inbox")
+
+
+        (async () => {localStorage.setItem("messages", JSON.stringify(window.messages))})();
+
+        
     }})
 
 })
@@ -55,7 +61,8 @@ document.getElementById("input_destname").addEventListener("change", function (e
 function checkForMessages() {
 
     downloadMessages()
-        .then((newMessages) => {
+    
+    .then((newMessages) => {
 
             if(newMessages.length!=0){
 
@@ -72,11 +79,10 @@ function checkForMessages() {
 
             }
 
-        })
+            const millisecs = 2000
+            setTimeout(checkForMessages, millisecs);
 
-    
-    const millisecs = 2000
-    setTimeout(checkForMessages, millisecs);
+        })
 }
 
 
