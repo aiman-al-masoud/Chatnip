@@ -159,6 +159,11 @@ function downloadMessages() {
 
             for (let message of data) {
 
+                //TODO: you must pull the public key of the sender from the server and compare it to the public key in 
+                //decryptionRes to complete the verification of the sender. Right now it only 
+                //checks wheather sender had access to ANY keypair, not necessarily the one 
+                //corresponding to the public key listed on the server as the sender's.
+
                 let decryptionRes = cryptico.decrypt(message["message_text"], myKeyPair);
                 let messageText = decryptionRes.plaintext;
                 let signature = decryptionRes.signature;
