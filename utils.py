@@ -20,9 +20,8 @@ DB = None
 def set_root_path(root_path):
     global ROOT_PATH, DB
     ROOT_PATH  = root_path
-    # sql db is still a work in progress...
-    DB = database.SqlDatabase('mysql+pymysql://root:@127.0.0.1/cats')
-    # DB = database.CsvDatabase(f"{ROOT_PATH}/dynamic/tables")
+    # DB = database.SqlDatabase('mysql+pymysql://root:@127.0.0.1/cats')
+    DB = database.CsvDatabase(f"{ROOT_PATH}/dynamic/tables")
 
 
 
