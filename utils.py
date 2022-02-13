@@ -21,8 +21,8 @@ def set_root_path(root_path):
     global ROOT_PATH, DB
     ROOT_PATH  = root_path
     # sql db is still a work in progress...
-    # DB = database.SqlDatabase('mysql+pymysql://root:@127.0.0.1/cats')
-    DB = database.CsvDatabase(f"{ROOT_PATH}/dynamic/tables")
+    DB = database.SqlDatabase('mysql+pymysql://root:@127.0.0.1/cats')
+    # DB = database.CsvDatabase(f"{ROOT_PATH}/dynamic/tables")
 
 
 
@@ -46,7 +46,8 @@ def user_exists(username):
 
     try:
         return (DB.get_users_table().username == username).sum() == 1
-    except:
+    except Exception as e:
+        print(e)
         return False     
 
 def delete_user(username):
@@ -139,10 +140,15 @@ def session_id_expired(username):
     """
     Return true if the session id of a user has expired.
     """
-    t = DB.get_users_table()
-    expiration_session_id = t.loc[ (t.username==username)  , "expiration_session_id"].to_list()[0]
-    expiration_date = datetime.fromtimestamp(expiration_session_id)
-    return datetime.now() >= expiration_date
+    try:
+        t = DB.get_users_table()
+        expiration_session_id = t.loc[ (t.username==username)  , "expiration_session_id"].to_list()[0]
+        expiration_date = datetime.fromtimestamp(int(expiration_session_id))
+        return datetime.now() >= expiration_date
+    except Exception as e:
+        print(e)
+        return True
+    
 
 
 def get_public_key(username):

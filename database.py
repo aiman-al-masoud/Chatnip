@@ -80,37 +80,49 @@ class SqlDatabase(Database):
 
     def __init__(self, connection_string):
         self.connection_string = connection_string # specifies schema
-        
+        self.users_table_df = None
+        self.messages_table_df = None
 
     def get_messages_table(self):
-        try:
+        
+        if self.messages_table_df is None:
             sqlEngine = create_engine( self.connection_string, pool_recycle=3600)
             dbConnection = sqlEngine.connect()
-            df = pd.read_sql("select * from MESSAGES", dbConnection)
+            
+            try:
+                df = pd.read_sql("select * from MESSAGES", dbConnection)
+            except Exception as e:
+                print(e)   
+                df = pd.DataFrame([], columns = Database.MESSAGE_COLUMNS)
+                self.save_table(df)
+
+            
             dbConnection.close()
-            return df.drop(columns=["index"])
-        except:
-            # create table if it doesn't exist
-            df = pd.DataFrame([], columns=Database.MESSAGE_COLUMNS)
-            self.save_table(df)
-            return df
+            self.messages_table_df = df    
+
+        return self.messages_table_df
 
 
     def get_users_table(self):
 
-        try:
+        if self.users_table_df is None:
+
             sqlEngine = create_engine( self.connection_string, pool_recycle=3600)
             dbConnection = sqlEngine.connect()
-            df = pd.read_sql("select * from USERS", dbConnection)
+            
+            try:
+                df = pd.read_sql("select * from USERS", dbConnection)
+            except Exception as e:
+                print(e)
+                df = pd.DataFrame([], columns=Database.USER_COLUMNS)
+                self.save_table(df)
+            
             dbConnection.close()
-            return df.drop(columns=["index"])
-        except:
-            # create table if it doesn't exist
-            df = pd.DataFrame([], columns=Database.USER_COLUMNS)
-            print("just created users table", tuple(df.columns))
-            self.save_table(df)
-            return df
+            self.users_table_df = df
+        
+        return self.users_table_df
 
+        
 
     def save_table(self, dataframe):
         sqlEngine = create_engine( self.connection_string, pool_recycle=3600)
@@ -119,11 +131,18 @@ class SqlDatabase(Database):
         columns = tuple(dataframe.columns)
 
         if columns==Database.USER_COLUMNS:
-            dataframe.to_sql("USERS", dbConnection, if_exists='replace')
+            self.users_table_df = dataframe
+            dataframe.to_sql("USERS", dbConnection, if_exists='replace', index=False)
             return
+
         if columns==Database.MESSAGE_COLUMNS:
-            dataframe.to_sql("MESSAGES", dbConnection, if_exists='replace')
-            return
+            self.messages_table_df = dataframe
+            try:
+                dataframe.to_sql("MESSAGES", dbConnection, if_exists='replace', index=False)
+                return
+            except Exception as e:
+                print(e)            
+                return
         
         raise Exception(f"dataframe {columns} has an invalid schema!!!!!")
 
