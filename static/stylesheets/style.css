@@ -211,6 +211,32 @@ select{
 }
 
 
+
+
 a{
     color: red;
+}
+
+
+#navbar_list{
+    overflow-x: hidden; 
+    overflow-y: auto; 
+    height: 100px; 
+    width: 100%;
+}
+
+
+#navbar_search_user{
+    position: absolute; 
+    bottom: 5%; left: 2%;
+}
+
+#title_chat_name{
+    display: inline;
+}
+
+
+#image_other_guys_avatar{
+    width: 30px; 
+    border-radius: 60px;
 }

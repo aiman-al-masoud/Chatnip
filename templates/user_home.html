@@ -16,10 +16,12 @@
 
 
     <nav class="chats_bar" id="chats_bar"> 
-        <h3>{{lang['your_chats']}}:</h3>
-        <div style=" overflow-x: hidden; overflow-y: auto; height: 100px; width: 100%;"  id="navbar_list"></div>
         
-        <div style="position: absolute; bottom: 5%; left: 2%;">   
+        <h3>{{lang['your_chats']}}:</h3>
+
+        <div id="navbar_list"></div>
+        
+        <div id="navbar_search_user">   
             <label for="input_destname">{{lang['chat_open']}}</label> 
             <input type="text" name="" id="input_destname" class="text_input_box" size=10 placeholder="trollslayer-1012">
         </div>
@@ -27,9 +29,8 @@
     </nav>
 
 
-
-    <h2 style="display: inline;" id="title_chat_name"></h2>
-    <img id="image_other_guys_avatar" src="" alt=""  style="width: 30px; border-radius: 60px;">
+    <h2  id="title_chat_name"></h2>
+    <img id="image_other_guys_avatar" src="" alt="">
 
 
     <div id="div_inbox" class="scroll_bar"></div>
