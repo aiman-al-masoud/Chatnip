@@ -211,8 +211,6 @@ select{
 }
 
 
-
-
 a{
     color: red;
 }
@@ -221,7 +219,8 @@ a{
 #navbar_list{
     overflow-x: hidden; 
     overflow-y: auto; 
-    height: 100px; 
+    /* height: 100px;  */
+    height: 70%;
     width: 100%;
 }
 

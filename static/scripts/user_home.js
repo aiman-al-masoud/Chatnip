@@ -17,6 +17,18 @@
 
 
 /**
+ * Scroll to the bottom of a div.
+ * @param {*} id 
+ */
+ function scrollToBottom (id) {
+    var div = document.getElementById(id);
+    div.scrollTop = div.scrollHeight - div.clientHeight;
+ }
+
+
+
+
+/**
  * On click send.
  */
 document.getElementById("button_send_message").addEventListener("click", function (elem, event) {
@@ -29,11 +41,10 @@ document.getElementById("button_send_message").addEventListener("click", functio
     // if sending msg to smn other than self, add own msg for display.
     if (window.chatname != getCookie("username")) {
         let newMessage = { isSentByMe: true, destname: window.chatname, message_text: messageText, date: new Date().toString().split("GMT")[0] };
-        messages.push(newMessage)
-        document.getElementById("div_inbox").appendChild(ChatMsg(newMessage))
-        displayChatNames([newMessage])
-        scrollToBottom("div_inbox")
-
+        messages.push(newMessage);
+        document.getElementById("div_inbox").appendChild(ChatMsg(newMessage));
+        displayChatNames([newMessage]);
+        scrollToBottom("div_inbox");
 
         (async () => {localStorage.setItem("messages", JSON.stringify(window.messages))})();
 
@@ -214,15 +225,6 @@ function switchToChat(chatname) {
 
 }
 
-
-/**
- * Scroll to the bottom of a div.
- * @param {*} id 
- */
-function scrollToBottom (id) {
-    var div = document.getElementById(id);
-    div.scrollTop = div.scrollHeight - div.clientHeight;
- }
 
 
 
