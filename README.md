@@ -1,6 +1,6 @@
 # SECURITY VULNERABILITIES
 
-**I received a couple of [dependabot alerts](https://medium.com/edureka/mvc-architecture-in-java-a85952ae2684) lately warning me of some security vulnerabilities in the [python library versions](https://github.com/aiman-al-masoud/Chatnip/blob/main/requirements.txt) used in this project. As I currenly have no time to fix that, please be warned! PS: [I don't bear any responsibility in case of damage](https://github.com/aiman-al-masoud/Chatnip/blob/main/LICENSE).**
+**I received a couple of [dependabot alerts](https://docs.github.com/en/code-security/dependabot/dependabot-alerts/about-dependabot-alerts) lately warning me of some security vulnerabilities in the [python library versions](https://github.com/aiman-al-masoud/Chatnip/blob/main/requirements.txt) used in this project. As I currenly have no time to fix that, please be warned! PS: [I don't bear any responsibility in case of damage](https://github.com/aiman-al-masoud/Chatnip/blob/main/LICENSE).**
 
 
 
