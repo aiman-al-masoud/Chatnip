@@ -1,3 +1,9 @@
+# SECURITY VULNERABILITIES
+
+**I received a couple of [dependabot alerts](https://medium.com/edureka/mvc-architecture-in-java-a85952ae2684) lately warning me of some security vulnerabilities in the [python library versions](https://github.com/aiman-al-masoud/Chatnip/blob/main/requirements.txt) used in this project. As I currenly have no time to fix that, please be warned! PS: [I don't bear any responsibility in case of damage](https://github.com/aiman-al-masoud/Chatnip/blob/main/LICENSE).**
+
+
+
 # A minimalist online instant-messenger.
 <a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg"/></a>
 
